@@ -23,4 +23,5 @@ public class UserController {
 	public String user_list(){
 		return userService.getUser("aaa");
 	}
+	
 }
