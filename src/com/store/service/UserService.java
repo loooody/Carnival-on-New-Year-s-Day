@@ -16,7 +16,8 @@ public class UserService {
 
 	public String getUser(String str) {
 		// TODO Auto-generated method stub
-		return userDao.getUser(str);
+		User user = userDao.getUser(str);
+		return user.toString();
 	}
 
 }

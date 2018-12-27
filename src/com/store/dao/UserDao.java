@@ -6,6 +6,6 @@ import com.store.entity.User;
 
 public interface UserDao {
 
-	public String getUser(String str);
+	public User getUser(String str);
 
 } 
