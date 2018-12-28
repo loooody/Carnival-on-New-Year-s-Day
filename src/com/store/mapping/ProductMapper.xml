@@ -9,3 +9,4 @@
 		SELECT * FROM product WHERE pflag=0 ORDER BY pdate DESC LIMIT 0,9
 	</select>
 </mapper>
+
