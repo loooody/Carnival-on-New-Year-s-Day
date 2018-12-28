@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.store.entity.User;
 
-public interface UserDao {
+public interface OrderDao {
 
-	User getUser(String str);
+	
 
 } 
