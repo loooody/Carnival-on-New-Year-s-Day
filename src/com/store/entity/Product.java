@@ -4,16 +4,40 @@ import java.util.Date;
 
 public class Product {
 
-	private String pid;
-	private String pname;
-	private String market_price;
-	private String shop_price;
-	private String pimage;
-	private Date pdate;
-	private int is_hot;
-	private String pdesc;
-	private int pflag;
-	private String cid;
+	private String pid;//商品编号
+	private String pname;//商品名称
+	private double market_price;//商品市场价格
+	private double shop_price;//商品商城价格
+	private String pimage;//商品图片路径
+	private Date pdate;//商品上架日期
+	private int is_hot;//商品是否热门
+	private String pdesc;//商品描述
+	private int pflag;//商品是否在货架上，0：在货架  1：下架
+	private String cid;//商品所在分类
+	
+	
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Product(String pid, String pname, double market_price, double shop_price, String pimage, Date pdate,
+			int is_hot, String pdesc, int pflag, String cid) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.market_price = market_price;
+		this.shop_price = shop_price;
+		this.pimage = pimage;
+		this.pdate = pdate;
+		this.is_hot = is_hot;
+		this.pdesc = pdesc;
+		this.pflag = pflag;
+		this.cid = cid;
+	}
+
+
 	public String getPid() {
 		return pid;
 	}
@@ -26,16 +50,16 @@ public class Product {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public String getMarket_price() {
+	public double getMarket_price() {
 		return market_price;
 	}
-	public void setMarket_price(String market_price) {
+	public void setMarket_price(double market_price) {
 		this.market_price = market_price;
 	}
-	public String getShop_price() {
+	public double getShop_price() {
 		return shop_price;
 	}
-	public void setShop_price(String shop_price) {
+	public void setShop_price(double shop_price) {
 		this.shop_price = shop_price;
 	}
 	public String getPimage() {
@@ -76,7 +100,7 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "product [pid=" + pid + ", pname=" + pname + ", market_price=" + market_price + ", shop_price="
+		return "Product [pid=" + pid + ", pname=" + pname + ", market_price=" + market_price + ", shop_price="
 				+ shop_price + ", pimage=" + pimage + ", pdate=" + pdate + ", is_hot=" + is_hot + ", pdesc=" + pdesc
 				+ ", pflag=" + pflag + ", cid=" + cid + "]";
 	}

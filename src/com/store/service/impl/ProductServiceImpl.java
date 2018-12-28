@@ -1,5 +1,8 @@
 package com.store.service.impl;
 
-public class ProductServiceImpl {
+import com.store.dao.ProductDao;
+
+public class ProductServiceImpl implements ProductDao {
 
 }
+

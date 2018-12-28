@@ -14,9 +14,14 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 http://mybatis.org/schema/mybatis-spring 
 http://mybatis.org/schema/mybatis-spring.xsd
 ">
-	<context:component-scan base-package="com.store">
+	<!-- <context:component-scan base-package="com.store">
 			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>  
+	</context:component-scan>  --> 
+	
+	<!-- 启用注解 -->
+	  <context:annotation-config/>
+	  <!-- 扫描包，把包中的有注解的类创建对象存储在IOC容器中 -->
+	  <context:component-scan base-package="com.store.service.impl"/>
 	
 	<!-- spring的配置文件 --> 
 	<!-- 数据源，事务控制 -->
@@ -32,20 +37,21 @@ http://mybatis.org/schema/mybatis-spring.xsd
 	<!-- Mybatis的整合 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 指定mybatis全局配置文件的位置 -->
-		<property name="configLocation" value="classpath:config/mybatis-config.xml"></property>
-		<property name="dataSource" ref="pooledDataSource" ></property>
+		<property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+		<property name="dataSource" ref="pooledDataSource" />
 		<!-- 指定mybatis，mapper文件的位置 -->
 		<property name="mapperLocations" value="classpath:com/store/mapping/*.xml" />
 	</bean>
 	
 	<!-- 配置扫描器，将mybatis接口的实现加入到IOC容器中 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
-		<property name="basePackage" value="com.store.dao" ></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="com.store.dao" />
 	</bean>
 	
 	<!-- 事务控制的配置 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
-		<property name="dataSource" ref="pooledDataSource" ></property>
+		<property name="dataSource" ref="pooledDataSource" />
 	</bean>
 
 </beans>

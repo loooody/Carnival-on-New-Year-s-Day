@@ -2,13 +2,20 @@ package com.store.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.store.entity.Product;
 
-import com.store.dao.UserDao;
-import com.store.entity.User;
 
-@Component
 public interface ProductService {
-	
+
+//	List<Product> findHots() throws Exception;
+//
+//	List<Product> findNews() throws Exception;
+//
+//	Product findProductByPid(String pid) throws Exception;
+//
+//	PageBean<Product> findProductsByCidWithPage(String cid, int currPage, int pageSize) throws Exception;
+//
+//	PageBean<Product> findAllProductsWithPage(int currPage, int pageSize) throws Exception;
+//
+//	void saveProduct(Product product) throws Exception;
 }

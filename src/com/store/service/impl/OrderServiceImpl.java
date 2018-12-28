@@ -1,5 +1,10 @@
 package com.store.service.impl;
 
-public class OrderServiceImpl {
+import com.store.service.OrderService;
+
+public class OrderServiceImpl implements OrderService {
+	
+	
 
 }
+

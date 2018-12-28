@@ -8,6 +8,9 @@ public class OrderItem {
 	
 	private Product product;
 	private Order order;
+	
+	
+	
 	public String getItemid() {
 		return itemid;
 	}
@@ -38,11 +41,5 @@ public class OrderItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-	@Override
-	public String toString() {
-		return "OrderItem [itemid=" + itemid + ", quantity=" + quantity + ", total=" + total + ", product=" + product
-				+ ", order=" + order + "]";
-	}
-	
 	
 }

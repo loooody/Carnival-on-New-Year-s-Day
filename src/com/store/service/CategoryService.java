@@ -1,15 +1,15 @@
 package com.store.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.store.entity.Category;
 
-import com.store.dao.UserDao;
-import com.store.entity.User;
 
-@Component
 public interface CategoryService {
-	
-	
+
+	List<Category> getAllCats();
+
+//	void addCategory(Category category) throws SQLException;
+
 }
