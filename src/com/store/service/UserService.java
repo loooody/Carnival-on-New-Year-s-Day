@@ -11,12 +11,12 @@ import com.store.entity.User;
 @Component
 public class UserService {
 	
-	@Autowired
-	private UserDao userDao;
-
-	public String getUser(String str) {
-		// TODO Auto-generated method stub
-		return userDao.getUser(str);
-	}
+//	@Autowired
+//	private UserDao userDao;
+//
+//	public String getUser(String str) {
+//		// TODO Auto-generated method stub
+//		return userDao.getUser(str);
+//	}
 
 }

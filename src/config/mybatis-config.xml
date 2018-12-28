@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
+	<typeAliases>
+	    <!-- 把这个包中的类都取一个别名，便于操作，因为类的使用时，需要这个类的全限定名。
+	       别名的命名规则是：类名=别名   com.icss.entity.Student==Student
+	    -->
+    	<package name="com.store.entity"/>
+ 	</typeAliases>
 </configuration>

@@ -14,14 +14,14 @@ import com.store.service.UserService;
 @Controller
 public class UserController {
 
-	@Autowired
-	@Qualifier("userService")
-	private UserService userService;
-	
-	@RequestMapping(value="/user")
-	@ResponseBody
-	public String user_list(){
-		return userService.getUser("aaa");
-	}
+//	@Autowired
+//	@Qualifier("userService")
+//	private UserService userService;
+//	
+//	@RequestMapping(value="/user")
+//	@ResponseBody
+//	public String user_list(){
+//		return userService.getUser("aaa");
+//	}
 	//test
 }
