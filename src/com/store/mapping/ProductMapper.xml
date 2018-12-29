@@ -18,3 +18,4 @@
 		SELECT * FROM product WHERE cid=#{cid} limit #{begin},#{pageSize}
 	</select>
 </mapper>
+

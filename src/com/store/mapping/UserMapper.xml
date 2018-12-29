@@ -6,3 +6,4 @@
 		select * from user where username=#{username} and password=#{password}
 	</select>
 </mapper>
+
