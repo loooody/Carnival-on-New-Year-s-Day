@@ -26,7 +26,7 @@ public class CategoryController {
 		List<Category> list = categoryService.getAllCats();
 		// 将全部分类转换为JSON格式的数据
 		String jsonStr = JSONArray.fromObject(list).toString();
-		System.out.println(jsonStr);
+		//System.out.println(jsonStr);
 		return jsonStr;
 	}
 }
