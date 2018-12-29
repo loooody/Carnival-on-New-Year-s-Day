@@ -31,7 +31,7 @@
 			//	获取服务端响应的数据，data中存放的是一个JSON格式的数据，遍历数组，动态显示分类信息
 			//<li><a href="#">${c.cname}</a></li>
 			$.each(data,function(i,obj){
-				var li = "<li><a href='${pageContext.request.contextPath}/ProductServlet?method=findProductsByCidWithPage&currPage=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+				var li = "<li><a href='${pageContext.request.contextPath}/product/findProductsByCidWithPage?currPage=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
 				$("#myUL").append(li);
 			});
 		},"json");
@@ -45,7 +45,7 @@
             -->
 	<div class="container-fluid">
 		<div class="col-md-4">
-			<img src="${pageContext.request.contextPath}/img/logo2.png" />
+			<img src="${pageContext.request.contextPath}/img/logo4.png" />
 		</div>
 		<div class="col-md-5">
 			<img src="${pageContext.request.contextPath}/img/header.png" />
@@ -55,15 +55,15 @@
 
 				<c:if test="${empty loginUser}">
 					<li><a
-						href="${pageContext.request.contextPath}/UserServlet?method=loginUI">登录</a></li>
+						href="${pageContext.request.contextPath}/user/loginUI">登录</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/UserServlet?method=registUI">注册</a></li>
+						href="${pageContext.request.contextPath}/user/registUI">注册</a></li>
 				</c:if>
 
 				<c:if test="${not empty loginUser}">
 					<li>欢迎&nbsp;&nbsp;${loginUser.username}</li>
 					<li><a
-						href="${pageContext.request.contextPath}/UserServlet?method=logout">退出</a></li>
+						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
 					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&currPage=1">我的订单</a></li>
@@ -86,7 +86,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">首页</a>
+					<a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">首页</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -105,9 +105,9 @@
 					</ul>
 					<form class="navbar-form navbar-right" role="search">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
+							<input type="text" class="form-control" placeholder="">
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default">搜索</button>
 					</form>
 
 				</div>
