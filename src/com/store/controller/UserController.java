@@ -35,6 +35,7 @@ public class UserController {
 	@RequestMapping("userLogin")
 	public ModelAndView userLogin(String username,String password,HttpServletRequest request) {
 		User user = new User();
+		//System.out.println("nfjsn"+username+password);
 		user.setUsername(username);
 		user.setPassword(password);
 		

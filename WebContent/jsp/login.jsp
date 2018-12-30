@@ -53,16 +53,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="avtar">
 		<img src="img/avtar.png" />
 	</div>
-  <form action="login" method="post">
-    <p><input type="text" name="userName" value="username" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'username';}"></p>
-    <p><input type="password" name="pwd" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'password';}"></p>
+  <form action="${pageContext.request.contextPath}/user/userLogin" method="post">
+    <p><input type="text" name="username" id="username" value="username" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'username';}"></p>
+    <p><input type="password" name="password" id="inputPassword3" placeholder="password"></p>
     
     <div class="form-group">
 	  <a href="jsp/register.jsp">立即注册</a> 
 	</div>		
     <div class="signin">
-				      <input id="login_butt" type="submit" value="Login" >
-			        </div>	 
+	  <input id="login_butt" type="submit" value="Login" name="submit">
+	  
+	</div>	 
   </form>
 </body>
 </html>
