@@ -5,5 +5,9 @@
 	<select id="userLogin" parameterType="User" resultType="User" >
 		select * from user where username=#{username} and password=#{password}
 	</select>
+	
+	<select id="findUserById" parameterType="int" resultType="User">
+		select * from grade where uid=#{id}
+	</select>
 </mapper>
 

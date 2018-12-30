@@ -11,8 +11,12 @@ import com.store.entity.User;
 public interface OrderDao {
 
 	void saveOrder(Order order);
-//
-//	void saveOrderItem(Connection conn, OrderItem item);
+	
+	List<Order> findOrderByUid(String uid);
+	
+	List<Order> findOrderByOid(String oid);
+
+	void saveOrderItem(OrderItem item);
 //
 //	int getTotalRecords(User user);
 //

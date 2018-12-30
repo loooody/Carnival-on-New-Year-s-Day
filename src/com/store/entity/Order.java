@@ -18,8 +18,6 @@ public class Order {
 	private List<OrderItem> list = new ArrayList<OrderItem>();
 	
 	
-	
-	
 	public String getOid() {
 		return oid;
 	}

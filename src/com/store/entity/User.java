@@ -32,6 +32,13 @@ public class User {
 		this.code = code;
 	}
 
+	public User(String uid, String username) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.uid = uid;
+		this.username = username;
+	}
+
 	public String getUid() {
 		return uid;
 	}
