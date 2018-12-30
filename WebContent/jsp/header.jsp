@@ -64,7 +64,7 @@
 					<li>欢迎&nbsp;&nbsp;${loginUser.username}</li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
-					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
+					<li><a href="${pageContext.request.contextPath}/cart/findCart">购物车</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&currPage=1">我的订单</a></li>
 				</c:if>

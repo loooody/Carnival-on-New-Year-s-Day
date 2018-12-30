@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.dao.CartItemDao" >
+
+	<resultMap type="CartItem" id="cartItemMap">
+	   <!-- 主键通常用id  column:表示表中的字段，property:实体对象的属性 -->
+       <id column="itemid" property="itemid"/>
+       <result column="quantity" property="quantity"/>
+       <result column="total" property="total"/>
+       <result column="cartid" property="cartid"/>
+       <!-- 年级对象的处理，外键对象的处理方式
+         pid:外键列的值  select:执行的SQl方法  property:返回对象的存储的属性名
+       -->
+       <association property="product" column="pid" select="com.store.dao.ProductDao.findProductByPid"/>
+	</resultMap>
+	
+
+	<insert id="addCartItem" parameterType="CartItem">
+		insert into cartitem values(#{itemid},#{quantity},#{total},#{product.pid},#{cartid})
+	</insert>
+	
+	<select id="findCartItemByCartId" resultMap="cartItemMap">
+		select * from cartitem where cartid = #{cartid}
+	</select>
+	
+	<update id="updateCartItem" parameterType="CartItem">
+		update cartitem set quantity=#{quantity},total=#{total} where itemid=#{itemid}
+	</update>
+	
+	<delete id="deleteCartItem">
+		delete from cartitem where pid=#{pid} and cartid=#{cartid}
+	</delete>
+	
+	<delete id="deleteAllCartItem">
+		delete from cartitem where cartid=#{cartid}
+	</delete>
+</mapper>

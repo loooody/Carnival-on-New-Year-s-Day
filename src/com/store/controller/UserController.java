@@ -35,7 +35,6 @@ public class UserController {
 	@RequestMapping("userLogin")
 	public ModelAndView userLogin(String username,String password,HttpServletRequest request) {
 		User user = new User();
-		//System.out.println("nfjsn"+username+password);
 		user.setUsername(username);
 		user.setPassword(password);
 		
@@ -56,6 +55,7 @@ public class UserController {
 			//	用户登录成功，将用户信息放入session中
 			request.getSession().setAttribute("loginUser", user02);
 			//	重定向到主页
+//			return new ModelAndView("jsp/index");
 			return new ModelAndView("index");
 		} catch (Exception e) {
 			//	用户登录失败
@@ -78,3 +78,4 @@ public class UserController {
 	}
 	
 }
+
