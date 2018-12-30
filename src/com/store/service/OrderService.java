@@ -8,7 +8,7 @@ import com.store.entity.User;
 
 public interface OrderService {
 
-//	void saveOrder(Order order) throws Exception;
+	void saveOrder(Order order) throws Exception;
 //
 //	PageBean<Order> findMyOrdersWithPage(User user, int currPage, int pageSize) throws Exception;
 //
