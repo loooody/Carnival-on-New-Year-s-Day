@@ -1,5 +1,8 @@
 package com.store.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.store.entity.User;
 import com.store.service.UserService;
 import com.store.service.impl.UserServiceImpl;
+import com.store.utils.MD5Utils;
 
 @Controller
 @RequestMapping("user")
@@ -21,6 +25,7 @@ public class UserController {
 	
 	@Autowired
 	UserServiceImpl userService;
+	MD5Utils MD5;
 	
 	@RequestMapping("loginUI")
 	public ModelAndView loginUI() {
@@ -75,6 +80,63 @@ public class UserController {
 		request.getSession().invalidate();
 		//	重定向到首页
 		return new ModelAndView("index");
+	}
+	
+	@RequestMapping("userinfo")
+	public ModelAndView userInfo(HttpServletRequest request) {
+		//User user = (User)request.getSession().getAttribute("loginUser");
+		//System.out.print(user);
+		return new ModelAndView("jsp/user_info");
+	}
+	
+	@RequestMapping("changePwdUI")
+	public ModelAndView jumpToChangePwd(HttpServletRequest request) {
+		return new ModelAndView("jsp/changePwd");
+	}
+	
+	@RequestMapping("changeInfoUI")
+	public ModelAndView jumpToChangeInfo(HttpServletRequest request) {
+		return new ModelAndView("jsp/changeInfo");
+	}
+	
+	@RequestMapping("changePwd")
+	public String changePwd(String oldPwd,String newPwd,HttpServletRequest request) {
+		String passwordString = MD5.md5(oldPwd);
+		System.out.println(passwordString);
+		User user = (User)request.getSession().getAttribute("loginUser");
+		String uid = user.getUid();
+		if(passwordString != user.getPassword()) {
+			String msg = "原始密码错误！";
+			request.getSession().setAttribute("msg", msg);
+			System.out.println(request.getSession().getAttribute("msg"));
+			return "redirect:changePwdUI";
+		}
+		//System.out.println(uid);
+		userService.updateUserPwd(uid, newPwd);
+		return "redirect:userinfo";
+	}
+
+	
+	@RequestMapping("changeInfo")
+	public String changeInfo(String nickname,String email,String sex,String birthday,String telephone,HttpServletRequest request) throws ParseException {
+//		if(birthday==null)
+//			System.out.println(nickname+email+sex+birthday);
+//		else {
+//			System.out.println(birthday);
+//		}
+		System.out.println(sex);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(birthday);
+		System.out.println(date);
+		User user = (User)request.getSession().getAttribute("loginUser");
+		user.setBirthday(date);
+		user.setSex(sex);
+		
+		user.setEmail(email);
+		user.setName(nickname);
+		user.setTelephone(telephone);
+		userService.updateUser(user);
+		return "redirect:userinfo";
 	}
 	
 }
