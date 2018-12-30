@@ -1,146 +1,91 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head></head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>会员注册</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
-		<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-		<!-- 引入自定义css文件 style.css -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
+<head>
 
-<style>
-  body{
-   margin-top:20px;
-   margin:0 auto;
- }
- .carousel-inner .item img{
-	 width:100%;
-	 height:300px;
- }
- .container .row div{ 
-	 /* position:relative;
-	 float:left; */
- }
- 
-font {
-    color: #3164af;
-    font-size: 18px;
-    font-weight: normal;
-    padding: 0 10px;
-}
- </style>
+<base href="<%=basePath%>">
+
+<title>login</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<link href="css/style2.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
 </head>
+
 <body>
+	<script>
+		$(document).ready(function(c) {
+			$('.close').on('click', function(c) {
+				$('.login-form').fadeOut('slow', function(c) {
+					$('.login-form').remove();
+				});
+			});
+		});
+	</script>
+	<h1>SIGN UP</h1>
+	<div class="login-form">
 
+		<div class="head-info">
+			<label class="lbl-1"> </label> <label class="lbl-2"> </label> <label
+				class="lbl-3"> </label>
+		</div>
+		<div class="clear"></div>
 
-<%@ include file="/jsp/header.jsp" %>
-
-
-
-
-<div class="container" style="width:100%;background:url('${pageContext.request.contextPath}/img/regist_bg.jpg');">
-<div class="row"> 
-
-	<div class="col-md-2"></div>
-	
-	
-
-
-	<div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
-		<font>会员注册</font>USER REGISTER
-		<form class="form-horizontal" style="margin-top:5px;" action="${pageContext.request.contextPath}/UserServlet?method=userRegist" method="post">
-			 <div class="form-group">
-			    <label for="username" class="col-sm-2 control-label">用户名</label>
-			    <div class="col-sm-6">
-			      <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名">
-			    </div>
-			  </div>
-			   <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-			    <div class="col-sm-6">
-			      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
-			    </div>
-			  </div>
-			   <div class="form-group">
-			    <label for="confirmpwd" class="col-sm-2 control-label">确认密码</label>
-			    <div class="col-sm-6">
-			      <input type="password" class="form-control" id="confirmpwd" placeholder="请输入确认密码">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-			    <div class="col-sm-6">
-			      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
-			    </div>
-			  </div>
-			 <div class="form-group">
-			    <label for="usercaption" class="col-sm-2 control-label">姓名</label>
-			    <div class="col-sm-6">
-			      <input type="text" name="name" class="form-control" id="usercaption" placeholder="请输入姓名">
-			    </div>
-			  </div>
-			  <div class="form-group opt">  
-			  <label for="inlineRadio1" class="col-sm-2 control-label">性别</label>  
-			  <div class="col-sm-6">
-			    <label class="radio-inline">
-			  <input type="radio" name="sex" id="inlineRadio1" value="男" checked="checked"> 男
-			</label>
-			<label class="radio-inline">
-			  <input type="radio" name="sex" id="inlineRadio2" value="女"> 女
-			</label>
+		<form
+			action="${pageContext.request.contextPath}/servlet/registerSevlet"
+			method="post">
+			<label class="lbl-4">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</label>
+			<input type="text" class="text" value="12个字符以内字母" name="username"
+				onFocus="this.value = '';"
+				onBlur="if (this.value == '') {this.value = '12个字符以内';}">
+			<div class="key">
+				<label class="lbl-4">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+				<input type="password"> <label class="lbl-4">确&nbsp;认&nbsp;密&nbsp;码</label>
+				<input type="password">
 			</div>
-			  </div>		
-			  <div class="form-group">
-			    <label for="date" class="col-sm-2 control-label">出生日期</label>
-			    <div class="col-sm-6">
-			      <input type="date" class="form-control"  name="birthday">		      
-			    </div>
-			  </div>
-			  
-			  <div class="form-group">
-			    <label for="date" class="col-sm-2 control-label">电话</label>
-			    <div class="col-sm-6">
-			      <input type="text" class="form-control"  name="telephone">		      
-			    </div>
-			  </div>
-			  
-			  <div class="form-group">
-			    <label for="date" class="col-sm-2 control-label">验证码</label>
-			    <div class="col-sm-3">
-			      <input type="text" class="form-control"  >
-			      
-			    </div>
-			    <div class="col-sm-2">
-			    <img src="${pageContext.request.contextPath}/img/captcha.jhtml"/>
-			    </div>
-			    
-			  </div>
-			 
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <input type="submit"  width="100" value="注册" name="submit" border="0"
-				    style="background: url('${pageContext.request.contextPath}/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-				    height:35px;width:100px;color:white;">
-			    </div>
-			  </div>
-			</form>
+			<div class="form opt">
+				<label class="lbl-4">&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="email">
+			</div>
+			<div class="form opt">
+				<label class="lbl-4">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+				<input type="text" class="text" name="name">
+			</div>
+			<div class="form opt">
+				<label class="lbl-4">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+				<label class="lbl-4"> <input type="radio" name="sex"
+					id="inlineRadio1" value="男" checked="checked"> 男
+				</label>
+				<lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+				<label class="lbl-4"> <input type="radio" name="sex"
+					id="inlineRadio2" value="女"> 女
+				</label>
+			</div>
+			<div class="form opt">
+				<label class="lbl-4">出&nbsp;生&nbsp;日&nbsp;期</label> <input
+					type="text" class="text" name="birthday">
+			</div>
+			<div class="last item">
+				<label class="lbl-4">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
+				<input type="text" class="text" name="birthday">
+			</div>
+			<div class="signin">
+				<input id="register_butt" type="submit" value="OK" />
+			</div>
+		</form>
 	</div>
-	
-	<div class="col-md-2"></div>
-  
-</div>
-</div>
-
-	  
-	
-	<%@ include file="/jsp/footer.jsp" %>
-
-</body></html>
-
-
-
-
+</body>
+</html>
