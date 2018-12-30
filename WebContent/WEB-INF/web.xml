@@ -23,7 +23,7 @@
   
   <!-- 定义Spring MVC的前端控制器 -->
   <servlet>
-  		<servlet-name>springmvc</servlet-name>
+  		<servlet-name>springMVC</servlet-name>
   		<servlet-class>
   			org.springframework.web.servlet.DispatcherServlet<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 		</servlet-class>
@@ -34,11 +34,11 @@
 			<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-	  		<servlet-name>springmvc</servlet-name>
+	  		<servlet-name>springMVC</servlet-name>
 	  		<url-pattern>/</url-pattern>
 	</servlet-mapping>
   	
-  	
+ 
   	<!-- SpringMVC中文乱码问题解决方案 -->
   <filter>
     <filter-name>character</filter-name>

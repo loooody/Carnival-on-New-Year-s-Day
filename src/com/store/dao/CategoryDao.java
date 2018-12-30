@@ -12,3 +12,4 @@ public interface CategoryDao {
 //	void addCategory(Category category);
 
 }
+

@@ -2,7 +2,6 @@ package com.store.entity;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class Category {
 
 	private String cid;

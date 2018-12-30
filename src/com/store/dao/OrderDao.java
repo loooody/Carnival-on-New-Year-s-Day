@@ -10,7 +10,7 @@ import com.store.entity.User;
 
 public interface OrderDao {
 
-//	void saveOrder(Connection conn, Order order);
+	void saveOrder(Order order);
 //
 //	void saveOrderItem(Connection conn, OrderItem item);
 //
