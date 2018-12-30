@@ -53,7 +53,7 @@
 
 				<div style="margin:0 auto;width:950px;">
 				
-				  <form id="myForm" method="post" action="${pageContext.request.contextPath}/CartServlet?method=addCartItemToCart">
+				  <form id="myForm" method="post" action="${pageContext.request.contextPath}/cart/addCartItemToCart">
 					<div class="col-md-6">
 						<img style="opacity: 1;width:400px;height:350px;" title="" class="medium" src="${pageContext.request.contextPath}/${product.pimage}">
 					</div>
