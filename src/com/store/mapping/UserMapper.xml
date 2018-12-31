@@ -9,5 +9,22 @@
 	<select id="findUserById" parameterType="int" resultType="User">
 		select * from grade where uid=#{id}
 	</select>
+
+	<update id="updateUserPwd">
+	  update user
+	  <set>
+		password=#{1}
+	  </set>
+	  where uid=#{0}
+	</update>
+	
+	<update id="updateUser">
+	  update user
+	  <set>
+		name=#{name},email=#{email},telephone=#{telephone},birthday=#{birthday},sex=#{sex}
+	  </set>
+	  where uid=#{uid}
+	</update>
+		
 </mapper>
 

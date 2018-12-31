@@ -1,8 +1,10 @@
 package com.store.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.store.entity.Cart;
+import com.store.entity.CartItem;
 import com.store.entity.Order;
 import com.store.entity.OrderItem;
 import com.store.entity.Product;
 import com.store.entity.User;
+import com.store.service.OrderService;
+import com.store.service.impl.CartServiceImpl;
 import com.store.service.impl.OrderServiceImpl;
 import com.store.utils.UUIDUtils;
+
 
 
 
@@ -26,36 +32,32 @@ public class OrderController {
 	@Autowired
 	OrderServiceImpl orderService;
 	
+	@Autowired
+	CartServiceImpl cartService;
+	
 	@RequestMapping("saveOrder")
-	public ModelAndView saveOrder(HttpServletRequest request) throws Exception{
-		UUIDUtils u = new UUIDUtils();
-		String orderItem = u.getUUID64();
-		String oid = u.getCode();
-		Product p = new Product("1",1399.0);
-		Date date = new Date();
-		User user = new User("DFE7C351CCCF4E8DBEB6E4C6079BFD35","aa");
+	public ModelAndView saveOrder(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		
-//		Order o = new Order(oid,date,3398.0,1,"456","456","456",user);
-		Order order = new Order();
-		order.setOid(oid);
-		order.setOrdertime(new Date());
-		order.setTotal(3398.0);
-		order.setState(1);
-		order.setUser(user);
-//		OrderItem orderitem = new OrderItem(orderItem,2,4567.0,p,o);
-		OrderItem orderitem = new OrderItem();
-		orderitem.setItemid(UUIDUtils.getCode());
-		orderitem.setQuantity(2);
-		orderitem.setTotal(123);
-		orderitem.setProduct(p);
-		// 设置当前的订单项属于哪个订单：从程序的角度体现订单项和订单的关系
-		orderitem.setOrder(order);
-		order.getList().add(orderitem);
-		
+		// 确认用户登录状态
+		User user = (User) request.getSession().getAttribute("loginUser");
+		if (null == user) {
+			request.setAttribute("msg", "请登录之后再下单");
+			return new ModelAndView("jsp/info.jsp");
+		}
+		// 获取购物车
+		List<CartItem> list =  (List<CartItem>) request.getSession().getAttribute("cartItems");
+//		System.out.println(list.isEmpty());
+		Order order = orderService.setValueForOrder(list, user);
+//		System.out.println(order.toString());
+		// 调用业务层功能：保存订单
 		orderService.saveOrder(order);
 		
-		request.getSession().setAttribute("order", order);
+		// 清空购物车
+		Cart cart = cartService.findCartByUid(user.getUid());
+		cartService.clearCart(cart);
+		
+		// 将订单放入request
+		request.setAttribute("order", order);
 		return new ModelAndView("jsp/order_info");
 	}
 }

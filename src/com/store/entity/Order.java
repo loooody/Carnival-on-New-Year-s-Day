@@ -72,6 +72,12 @@ public class Order {
 	public void setList(List<OrderItem> list) {
 		this.list = list;
 	}
+	@Override
+	public String toString() {
+		return "Order [oid=" + oid + ", ordertime=" + ordertime + ", total=" + total + ", state=" + state + ", address="
+				+ address + ", name=" + name + ", telephone=" + telephone + ", user=" + user + ", list=" + list + "]";
+	}
+	
 	
 	
 }

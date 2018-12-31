@@ -37,6 +37,6 @@
 	</select>
 	
 	<insert id="saveOrderItem" parameterType="OrderItem">
-		insert into orderitem values(#{itemid}, #{quantity}, #{total}, #{product.pid}, #{order.oid})
+		insert into orderitem(itemid, quantity, total, pid, oid) values(#{itemid}, #{quantity}, #{total}, #{product.pid}, #{order.oid})
 	</insert>
 </mapper>
