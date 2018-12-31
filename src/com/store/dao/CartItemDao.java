@@ -41,3 +41,4 @@ public interface CartItemDao {
 	 */
 	void deleteAllCartItem(String cartid);
 }
+

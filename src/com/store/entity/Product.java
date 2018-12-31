@@ -38,6 +38,14 @@ public class Product {
 	}
 
 
+	public Product(String pid, double price) {
+		// TODO Auto-generated constructor stub
+		this.pid = pid;
+		this.shop_price = price;
+		
+	}
+
+
 	public String getPid() {
 		return pid;
 	}

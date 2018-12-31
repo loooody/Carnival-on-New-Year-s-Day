@@ -3,16 +3,22 @@ package com.store.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.store.entity.Order;
 import com.store.entity.OrderItem;
 import com.store.entity.User;
 
-
+@Component
 public interface OrderDao {
 
 	void saveOrder(Order order);
-//
-//	void saveOrderItem(Connection conn, OrderItem item);
+	
+	List<Order> findOrderByUid(String uid);
+	
+	List<Order> findOrderByOid(String oid);
+
+	void saveOrderItem(OrderItem item);
 //
 //	int getTotalRecords(User user);
 //
