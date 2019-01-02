@@ -45,5 +45,5 @@
 			<bean class="com.store.interceptor.PrivilegeInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors> 
-	 		
+
 </beans>
