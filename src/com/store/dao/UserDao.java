@@ -9,9 +9,12 @@ public interface UserDao {
 //
 //	User userActive(String code);
 //
-//	void updateUser(User user);
+	void updateUser(User user);
+	
+	void updateUserPwd(String uid,String newPwd);
 
 	User userLogin(User user);
+
 
 } 
 

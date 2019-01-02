@@ -11,4 +11,8 @@ public interface UserService {
 	boolean userActive(String code);
 
 	User userLogin(User user);
+	
+	void updateUser(User user);
+	
+	void updateUserPwd(String uid,String newPwd);
 }

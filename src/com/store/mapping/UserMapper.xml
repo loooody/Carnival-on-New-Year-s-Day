@@ -5,8 +5,30 @@
 	<select id="userLogin" parameterType="User" resultType="User">
 		select * from user where username=#{username} and password=#{password}
 	</select>
+  
 	<insert id="userRegist" parameterType="User" >
 		insert into user values(#{uid},#{username},#{password},#{name},#{email},#{telephone},#{birthday},#{sex},#{state},#{code})
 	</insert>
+	
+	<select id="findUserById" parameterType="int" resultType="User">
+		select * from grade where uid=#{id}
+	</select>
+
+	<update id="updateUserPwd">
+	  update user
+	  <set>
+		password=#{1}
+	  </set>
+	  where uid=#{0}
+	</update>
+	
+	<update id="updateUser">
+	  update user
+	  <set>
+		name=#{name},email=#{email},telephone=#{telephone},birthday=#{birthday},sex=#{sex}
+	  </set>
+	  where uid=#{uid}
+	</update>
+
 </mapper>
 

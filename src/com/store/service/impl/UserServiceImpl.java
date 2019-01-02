@@ -38,5 +38,17 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public void updateUserPwd(String uid,String newPwd) {
+		userDao.updateUserPwd(uid, newPwd);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userDao.updateUser(user);
+	}
+	
+	
 }
 

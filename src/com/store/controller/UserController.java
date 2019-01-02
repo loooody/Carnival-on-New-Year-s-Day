@@ -1,5 +1,7 @@
 package com.store.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import com.store.service.impl.UserServiceImpl;
 import com.store.utils.DateTransfrormUtils;
 import com.store.utils.MD5Utils;
 import com.store.utils.UUIDUtils;
+import com.store.utils.MD5Utils;
 
 @Controller
 @RequestMapping("user")
@@ -26,6 +29,8 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userService;
 
+	MD5Utils MD5;
+  
 	@RequestMapping("loginUI")
 	public ModelAndView loginUI() {
 		return new ModelAndView("jsp/login");
@@ -39,7 +44,7 @@ public class UserController {
 	@RequestMapping("userLogin")
 	public ModelAndView userLogin(String username, String password, HttpServletRequest request) {
 		User user = new User();
-		// System.out.println("nfjsn"+username+password);
+
 		user.setUsername(username);
 		user.setPassword(password);
 
@@ -55,7 +60,7 @@ public class UserController {
 			user02 = userService.userLogin(user);
 			// 用户登录成功，将用户信息放入session中
 			request.getSession().setAttribute("loginUser", user02);
-			// 重定向到主页
+
 			return new ModelAndView("index");
 		} catch (Exception e) {
 			// 用户登录失败
@@ -105,4 +110,62 @@ public class UserController {
 		return new ModelAndView("index");
 	}
 
+	
+	@RequestMapping("userinfo")
+	public ModelAndView userInfo(HttpServletRequest request) {
+		//User user = (User)request.getSession().getAttribute("loginUser");
+		//System.out.print(user);
+		return new ModelAndView("jsp/user_info");
+	}
+	
+	@RequestMapping("changePwdUI")
+	public ModelAndView jumpToChangePwd(HttpServletRequest request) {
+		return new ModelAndView("jsp/changePwd");
+	}
+	
+	@RequestMapping("changeInfoUI")
+	public ModelAndView jumpToChangeInfo(HttpServletRequest request) {
+		return new ModelAndView("jsp/changeInfo");
+	}
+	
+	@RequestMapping("changePwd")
+	public String changePwd(String oldPwd,String newPwd,HttpServletRequest request) {
+		String passwordString = MD5.md5(oldPwd);
+		System.out.println(passwordString);
+		User user = (User)request.getSession().getAttribute("loginUser");
+		String uid = user.getUid();
+		if(passwordString != user.getPassword()) {
+			String msg = "原始密码错误！";
+			request.getSession().setAttribute("msg", msg);
+			System.out.println(request.getSession().getAttribute("msg"));
+			return "redirect:changePwdUI";
+		}
+		//System.out.println(uid);
+		userService.updateUserPwd(uid, newPwd);
+		return "redirect:userinfo";
+	}
+
+	
+	@RequestMapping("changeInfo")
+	public String changeInfo(String nickname,String email,String sex,String birthday,String telephone,HttpServletRequest request) throws ParseException {
+//		if(birthday==null)
+//			System.out.println(nickname+email+sex+birthday);
+//		else {
+//			System.out.println(birthday);
+//		}
+		System.out.println(sex);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(birthday);
+		System.out.println(date);
+		User user = (User)request.getSession().getAttribute("loginUser");
+		user.setBirthday(date);
+		user.setSex(sex);
+		
+		user.setEmail(email);
+		user.setName(nickname);
+		user.setTelephone(telephone);
+		userService.updateUser(user);
+		return "redirect:userinfo";
+	}
 }
+
