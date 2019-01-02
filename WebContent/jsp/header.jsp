@@ -61,12 +61,12 @@
 				</c:if>
 
 				<c:if test="${not empty loginUser}">
-					<li>欢迎&nbsp;&nbsp;${loginUser.name}</li>
+					<li>欢迎&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
 					<li><a href="${pageContext.request.contextPath}/cart/findCart">购物车</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&currPage=1">我的订单</a></li>
+						href="${pageContext.request.contextPath}/Order/order_list?currPage=1">我的订单</a></li>
 				</c:if>
 			</ol>
 		</div>
@@ -117,5 +117,6 @@
 		</nav>
 	</div>
 </body>
+
 
 </html>

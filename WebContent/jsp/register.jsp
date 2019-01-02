@@ -25,6 +25,26 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+  		function check(form){
+                    //form属性的elements的首字母e要小写
+				if(form.elements[0].value == ""||form.elements[1].value == ""){ 
+					alert("用户名和密码不能为空");
+					form.elements[0].focus();
+					form.elements[1].focus();
+					return false;
+				}else if(form.elements[1].value!=form.elements[2].value){
+					alert("两次密码输入不同");
+					form.elements[1].focus();
+					form.elements[2].focus();
+					return false;
+				}else{
+					alert("注册成功!");
+					return true;
+				}
+  	  	}
+
+</script>
 	<script>
 		$(document).ready(function(c) {
 			$('.close').on('click', function(c) {
@@ -43,25 +63,22 @@
 		</div>
 		<div class="clear"></div>
 
-		<form
-			action="${pageContext.request.contextPath}/servlet/registerSevlet"
-			method="post">
+		<form action="${pageContext.request.contextPath}/user/userRegister" method="post" onsubmit="return check(this)">
 			<label class="lbl-4">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</label>
-			<input type="text" class="text" value="12个字符以内字母" name="username"
-				onFocus="this.value = '';"
-				onBlur="if (this.value == '') {this.value = '12个字符以内';}">
+			<input type="text" class="text"  name="username">
 			<div class="key">
 				<label class="lbl-4">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-				<input type="password"> <label class="lbl-4">确&nbsp;认&nbsp;密&nbsp;码</label>
-				<input type="password">
+				<input type="password"name="pwd">
+			     <label class="lbl-4">确&nbsp;认&nbsp;密&nbsp;码</label>
+				<input type="password" name="ConfirmPwd">
 			</div>
 			<div class="form opt">
 				<label class="lbl-4">&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				<input type="email">
+				<input type="email"name="email" placeholder="例如：123@qq.com">
 			</div>
 			<div class="form opt">
 				<label class="lbl-4">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
-				<input type="text" class="text" name="name">
+				<input type="text" class="text" name="name" >
 			</div>
 			<div class="form opt">
 				<label class="lbl-4">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -75,12 +92,12 @@
 				</label>
 			</div>
 			<div class="form opt">
-				<label class="lbl-4">出&nbsp;生&nbsp;日&nbsp;期</label> <input
-					type="text" class="text" name="birthday">
+				<label class="lbl-4">出&nbsp;生&nbsp;日&nbsp;期</label> 
+				<input type="text" class="text" name="birthday" placeholder="例如：2018-12-31">
 			</div>
 			<div class="last item">
 				<label class="lbl-4">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
-				<input type="text" class="text" name="birthday">
+				<input type="text" class="text" name="phone">
 			</div>
 			<div class="signin">
 				<input id="register_butt" type="submit" value="OK" />

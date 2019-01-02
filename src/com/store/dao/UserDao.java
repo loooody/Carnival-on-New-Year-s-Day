@@ -5,7 +5,7 @@ import com.store.entity.User;
 
 public interface UserDao {
 
-//	void userRegist(User user);
+	void userRegist(User user);
 //
 //	User userActive(String code);
 //

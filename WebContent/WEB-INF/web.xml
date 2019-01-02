@@ -38,7 +38,7 @@
 	  		<url-pattern>/</url-pattern>
 	</servlet-mapping>
   	
- 
+  	
   	<!-- SpringMVC中文乱码问题解决方案 -->
   <filter>
     <filter-name>character</filter-name>
@@ -56,4 +56,6 @@
     <filter-name>character</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+
 </web-app>

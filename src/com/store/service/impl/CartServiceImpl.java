@@ -146,7 +146,46 @@ public class CartServiceImpl implements CartService {
 		cartDao.deleteCart(cart);
 	}
 
+	@Override
+	public String updateCart(Cart cart, String pid, int num) {
+		//修改购物项数量，小计
+		List<CartItem> list = cartItemDao.findCartItemByCartId(cart.getCartid());
+		int quantity = 0;
+		double subTotal = 0;
+		double total = 0;
+		Iterator<CartItem> it = list.iterator();
+		while(it.hasNext()) {
+			CartItem cartItem = it.next();
+			if(cartItem.getProduct().getPid().equals(pid)) {
+				//修改数量
+				quantity = cartItem.getQuantity() + num;
+				cartItem.setQuantity(quantity);
+				//修改小计
+				total = num*cartItem.getProduct().getShop_price();
+				subTotal = cartItem.getTotal() + total;
+				cartItem.setTotal(subTotal);
+				cartItemDao.updateCartItem(cartItem);
+				break;
+			}
+		}
+		
+		//修改购物车总金额
+		total = cart.getTotal() + total;
+		cart.setTotal(total);
+		cartDao.updateCart(cart);
+		
+		//返回json格式的数据，包括购物项小计和购物车总金额
+		//"{'subTotal':1,'total':10}"
+		//String jsonStr = "{'subTotal':" + subTotal + ",'total':" + total + "}";
+		//System.out.println(jsonStr);
+		
+		//返回包含 购物项小计和购物车总金额 的字符串，用@分隔
+		String str = String.valueOf(subTotal) + "@" + String.valueOf(total);
+		//System.out.println(str);
+		return str;
+	}
 
+	
 
 
 	
