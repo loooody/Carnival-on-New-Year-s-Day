@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
@@ -55,13 +55,212 @@
 						window.location.href="${pageContext.request.contextPath}/cart/clearCart";
 					}
 				});
+				
+
+				//修改商品数量：
+				//1.值为1的时候提示不能再减少了
+				//2.值大于100时提示不能购买更多
+				//3.数量增加或减少时对应修改购物项小计和购物车总价
+				//-------------------------------------------------------------------------------------------------
+				//为“-”绑定点击事件
+				$(".quanMinus").click(function(){
+					$(".quanPlus").attr("disabled",false);
+					
+					var pid = this.id;//商品id
+					//获取数量标签
+					var x=document.getElementsByName("quantity");
+					var target;//目标数量标签
+					for(var i=0;i<x.length;i++){
+						var a = x[i];
+						if(pid == a.id){
+							//quantity = a.value;
+							target = a;
+							break;
+						}
+					}
+					
+					//获取小计标签
+					var y = document.getElementsByClassName("subtotal");
+					var targetSubTotal;//目标小计标签
+					for(var i=0;i<y.length;i++){
+						var a = y[i];
+						if(pid == a.id){
+							targetSubTotal = a;
+							break;
+						}
+					}
+					
+					if(target.value == 1){
+						alert("该商品数量不能再少了");
+						$(this).attr("disabled",true);
+					}else{
+						//商品数量减1
+						target.value = target.value - 1;
+						var url = "${pageContext.request.contextPath}/cart/updateCart";
+						var obj = {"pid":pid,"num":-1};
+						$.post(url,obj,function(data){
+							//获取服务端响应的数据
+							//subTotal@total
+							var str = data.split("@");
+							var newSubTotal = str[0];
+							var newTotal = str[1];
+							
+							targetSubTotal.innerHTML = "￥" + newSubTotal;
+							$("#cartTotal").html("￥" + newTotal + "元");
+						},"html");
+						//window.open("${pageContext.request.contextPath}/cart/reduceQuantity?pid="+pid);
+					}
+				});
+				
+				//-------------------------------------------------------------------------------------------------
+				//为“+”绑定点击事件 increase
+				$(".quanPlus").click(function(){
+					$(".quanMinus").attr("disabled",false);
+					var pid = this.id;//商品id
+					//获取数量标签
+					var x=document.getElementsByName("quantity");
+					var target;//目标数量标签
+					for(var i=0;i<x.length;i++){
+						var a = x[i];
+						if(pid == a.id){
+							//quantity = a.value;
+							target = a;
+							break;
+						}
+					}
+					//获取小计标签
+					var y = document.getElementsByClassName("subtotal");
+					var targetSubTotal;//目标小计标签
+					for(var i=0;i<y.length;i++){
+						var a = y[i];
+						if(pid == a.id){
+							targetSubTotal = a;
+							break;
+						}
+					}
+					
+					if(target.value == 100){
+						alert("已达最大购买数量");
+						$(this).attr("disabled",true);
+					}else{
+						//商品数量加1
+						target.value = parseInt(target.value) + 1;
+						var url = "${pageContext.request.contextPath}/cart/updateCart";
+						var obj = {"pid":pid,"num":1};
+						$.post(url,obj,function(data){
+							//获取服务端响应的数据
+							//subTotal@total
+							var str = data.split("@");
+							var newSubTotal = str[0];
+							var newTotal = str[1];
+							
+							targetSubTotal.innerHTML = "￥" + newSubTotal;
+							$("#cartTotal").html("￥" + newTotal + "元");
+						},"html");
+						//window.open("${pageContext.request.contextPath}/cart/reduceQuantity?pid="+pid);
+					}
+				});
+				
+				//-------------------------------------------------------------------------------------------------
+				//根据输入框输入的数据修改商品数量
+				var oldValue;
+				var newValue;
+				$(".quan").focus(function(){
+					var pid = this.id; 
+					//console.log("quantity:" + this.value);
+					oldValue = this.value;
+				}); 
+				$(".quan").on('input',function(){
+					var pid = this.id; 
+					//console.log("quantity:" + this.value);
+					newValue = this.value;
+					
+					if(newValue == ""){
+						//this.value = oldValue;
+						//alert("不能为空");
+					}else if(newValue == 0){
+						this.value = oldValue;
+						alert("购买数量不能为0");
+					}else if(newValue < 0){
+						this.value = oldValue;
+						alert("购买数量不能为负");
+					}else if(newValue > 100){
+						this.value = oldValue;
+						alert("购买数量不能超过100");
+					}else if(newValue >= 1 && newValue <= 100){
+						
+					}else{
+						this.value = oldValue;
+						alert("输入不合法，请重新输入");
+					}
+					
+				}); 
+				
+				$(".quan").blur(function(){
+					
+					newValue = this.value;
+					
+					var pid = this.id;
+					console.log("pid:" + this.id)
+					console.log("old:" + oldValue);
+					console.log("new:" + newValue);
+					
+					if(newValue.length == 0){
+						this.value = oldValue;
+						alert("购买数量不能为空");
+					}
+					if(newValue != oldValue && newValue >= 1 && newValue <= 100){
+						var num = newValue - oldValue;//商品变化的数量
+						console.log("num:" + num);
+						
+						//获取数量标签
+						var x=document.getElementsByName("quantity");
+						var target;//目标数量标签
+						for(var i=0;i<x.length;i++){
+							var a = x[i];
+							if(pid == a.id){
+								//quantity = a.value;
+								target = a;
+								break;
+							}
+						}
+						
+						//获取小计标签
+						var y = document.getElementsByClassName("subtotal");
+						var targetSubTotal;//目标小计标签
+						for(var i=0;i<y.length;i++){
+							var a = y[i];
+							if(pid == a.id){
+								targetSubTotal = a;
+								break;
+							}
+						}
+						
+						//商品数量变化
+						//target.value = parseInt(target.value) + parseInt(num);
+						var url = "${pageContext.request.contextPath}/cart/updateCart";
+						var obj = {"pid":pid,"num":num};
+						$.post(url,obj,function(data){
+							//获取服务端响应的数据
+							//subTotal@total
+							var str = data.split("@");
+							var newSubTotal = str[0];
+							var newTotal = str[1];
+							
+							targetSubTotal.innerHTML = "￥" + newSubTotal;
+							$("#cartTotal").html("￥" + newTotal + "元");
+						},"html");
+					}
+					
+				});
+				
+				
 			});
 		</script>
 	</head>
 
 	<body>
 
-		
 			<%@ include file="/jsp/header.jsp" %>
 			
 
@@ -78,7 +277,7 @@
 			<c:if test="${not empty cart}">
 			   		<div class="row">
 					<div style="margin:0 auto; margin-top:10px;width:950px;">
-						<strong style="font-size:16px;margin:5px 0;">订单详情</strong>
+						<strong style="font-size:16px;margin:5px 0;">购物车详情</strong>
 						<table class="table table-bordered">
 							<tbody>
 								<tr class="warning">
@@ -96,16 +295,18 @@
 										<img src="${pageContext.request.contextPath}/${item.product.pimage}" width="70" height="60">
 									</td>
 									<td width="30%">
-										<a target="_blank">${item.product.pname}</a>
+										<a target="_blank" href="${pageContext.request.contextPath}/product/findProductByPid?pid=${item.product.pid}">${item.product.pname}</a>
 									</td>
 									<td width="20%">
 										￥${item.product.shop_price}
 									</td>
-									<td width="10%">
-										<input type="text" name="quantity" value="${item.quantity}" maxlength="4" size="10">
+									<td width="15%"><!-- 10% -->
+										<input type="button" value="-" class="quanMinus" id="${item.product.pid}">
+										<input class="quan" id="${item.product.pid}" type="text" name="quantity" value="${item.quantity}" maxlength="4" size="2" style="text-align:center;">
+										<input type="button" value="+" class="quanPlus" id="${item.product.pid}">
 									</td>
 									<td width="15%">
-										<span class="subtotal">￥${item.total}</span>
+										<span class="subtotal" id="${item.product.pid}">￥${item.total}</span>
 									</td>
 									<td>
 										<a href="javascript:;" id="${item.product.pid}" class="delete">删除</a>
@@ -119,9 +320,12 @@
 	
 	  			<div style="margin-right:130px;">
 					<div style="text-align:right;">
-						<em style="color:#ff6600;">
-					登录后确认是否享有优惠&nbsp;&nbsp;
-				</em> 赠送积分: <em style="color:#ff6600;">${cart.total}</em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥${cart.total}元</strong>
+					<!--  	<em style="color:#ff6600;">
+							登录后确认是否享有优惠&nbsp;&nbsp;
+						</em> 
+						赠送积分: <em style="color:#ff6600;">${cart.total}</em>&nbsp; 
+					-->
+					商品金额: <strong id="cartTotal" style="color:#ff6600;">￥${cart.total}元</strong>
 					</div>
 					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
 						<a href="${pageContext.request.contextPath}/cart/clearCart" id="clear" class="clear">清空购物车</a>
@@ -144,5 +348,4 @@
 		<%@ include file="/jsp/footer.jsp" %>
 
 	</body>
-
 </html>
