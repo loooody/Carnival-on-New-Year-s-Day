@@ -14,13 +14,12 @@
 		<association property="uid" column="uid" select="com.store.UserDao.findUserById" />
 	</resultMap>
 	
-	<resultMap type="OrderItem" id="itemMap">
+	<resultMap type="java.util.HashMap" id="itemMap">
 		<id column="itemid" property="itemid" />
 		<result column="quantity" property="quantity" />
 		<result column="total" property="total" />
-		
-		<association property="pid" column="pid" select="com.store.ProductDao.findProductByPid"></association>
-		<association property="oid" column="oid" select="com.store.OrderDao.findOrderByOid"></association>
+		<association property="order" column="oid" select="com.store.OrderDao.findOrderByOid"></association>
+		<association property="product" column="pid" select="com.store.ProductDao.findProductByPid" ></association>
 	</resultMap>
 	
 	<insert id="saveOrder" parameterType="Order">
@@ -28,15 +27,23 @@
 			 VALUES(#{oid},#{ordertime},#{total},#{state},#{address},#{name},#{telephone},#{user.uid});
 	</insert>
 	
-	<select id="findOrderByUid" resultMap="orderMap">
-		slect * from order where uid=#{uid}
-	</select>
-	
-	<select id="findOrderByOid" resultMap="orderMap">
-		slect * from order where oid=#{oid}
+	<select id="getTotalRecords" parameterType="User" resultType="java.lang.Integer" >
+		select count(*) from orders where uid=#{uid}
 	</select>
 	
 	<insert id="saveOrderItem" parameterType="OrderItem">
 		insert into orderitem(itemid, quantity, total, pid, oid) values(#{itemid}, #{quantity}, #{total}, #{product.pid}, #{order.oid})
 	</insert>
+	
+	<select id="findMyOrdersWithPage" resultType="Order" >
+		select * from orders where uid=#{u.uid} limit #{b}, #{p}
+	</select>
+	
+	<select id="findOrderByOid" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from orderitem o,product p where o.pid=p.pid and oid=#{oid} 
+	</select>
+	
+	<select id="getOrder" resultType="Order">
+		select * from orders where oid=#{oid}
+	</select>
 </mapper>
