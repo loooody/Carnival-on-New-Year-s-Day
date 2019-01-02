@@ -9,7 +9,18 @@ public class OrderItem {
 	private Product product;
 	private Order order;
 	
+	public OrderItem(){
+		
+	}
 	
+	public OrderItem(String itemid, int quantity, double total, Product product, Order order) {
+		super();
+		this.itemid = itemid;
+		this.quantity = quantity;
+		this.total = total;
+		this.product = product;
+		this.order = order;
+	}
 	
 	public String getItemid() {
 		return itemid;

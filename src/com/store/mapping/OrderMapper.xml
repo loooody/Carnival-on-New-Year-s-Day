@@ -2,5 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.store.dao.OrderDao" >
+	<resultMap type="Order" id="orderMap">
+	<!-- 主键通常用id， column：表示表中字段， property：实体对象的属性 -->
+		<id column="oid" property="oid" />
+		<result column="ordertime" property="ordertime" />
+		<result column="total" property="total" />
+		<result column="address" property="address" />
+		<result column="name" property="name" />
+		<result column="telephone" property="telephone" />
+		
+		<association property="uid" column="uid" select="com.store.UserDao.findUserById" />
+	</resultMap>
 	
+	<resultMap type="java.util.HashMap" id="itemMap">
+		<id column="itemid" property="itemid" />
+		<result column="quantity" property="quantity" />
+		<result column="total" property="total" />
+		<association property="order" column="oid" select="com.store.OrderDao.findOrderByOid"></association>
+		<association property="product" column="pid" select="com.store.ProductDao.findProductByPid" ></association>
+	</resultMap>
+	
+	<insert id="saveOrder" parameterType="Order">
+		INSERT INTO orders(oid,ordertime,total,state,address,name,telephone,uid)
+			 VALUES(#{oid},#{ordertime},#{total},#{state},#{address},#{name},#{telephone},#{user.uid});
+	</insert>
+	
+	<select id="getTotalRecords" parameterType="User" resultType="java.lang.Integer" >
+		select count(*) from orders where uid=#{uid}
+	</select>
+	
+	<insert id="saveOrderItem" parameterType="OrderItem">
+		insert into orderitem(itemid, quantity, total, pid, oid) values(#{itemid}, #{quantity}, #{total}, #{product.pid}, #{order.oid})
+	</insert>
+	
+	<select id="findMyOrdersWithPage" resultType="Order" >
+		select * from orders where uid=#{u.uid} limit #{b}, #{p}
+	</select>
+	
+	<select id="findOrderByOid" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from orderitem o,product p where o.pid=p.pid and oid=#{oid} 
+	</select>
+	
+	<select id="getOrder" resultType="Order">
+		select * from orders where oid=#{oid}
+	</select>
 </mapper>

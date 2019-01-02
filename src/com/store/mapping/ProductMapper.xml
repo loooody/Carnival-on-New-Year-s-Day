@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.store.dao.ProductDao" >
-	<select id="findHots" resultType="Product" >
-		SELECT * FROM product WHERE pflag=0 AND is_hot=1 ORDER BY pdate DESC LIMIT 0,9
+<mapper namespace="com.store.dao.ProductDao">
+	<select id="findHots" resultType="Product">
+		SELECT * FROM product
+		WHERE pflag=0 AND is_hot=1 ORDER BY pdate DESC LIMIT 0,9
 	</select>
-	<select id="findNews" resultType="Product" >
-		SELECT * FROM product WHERE pflag=0 ORDER BY pdate DESC LIMIT 0,9
+	<select id="findNews" resultType="Product">
+		SELECT * FROM product
+		WHERE pflag=0 ORDER BY pdate DESC LIMIT 0,9
 	</select>
-	<select id="findProductByPid" resultType="Product" >
-		SELECT * FROM product WHERE pid=#{pid}
+	<select id="findProductByPid" resultType="Product">
+		SELECT * FROM
+		product WHERE pid=#{pid}
 	</select>
-	<select id="findTotalRecords" resultType="java.lang.Integer" >
+	<select id="findTotalRecords" resultType="java.lang.Integer">
 		SELECT count(1) FROM product WHERE cid=#{cid}
 	</select>
-	<select id="findProductsByCidWithPage" resultType="Product" >
+	<select id="findProductsByCidWithPage" resultType="Product">
 		SELECT * FROM product WHERE cid=#{cid} limit #{begin},#{pageSize}
 	</select>
 	<select id="findAllProductsWithPage" resultType="Product" >
@@ -42,4 +45,3 @@
 		DELETE FROM product WHERE pid=#{pid}
 	</delete>
 </mapper>
-

@@ -28,4 +28,12 @@ public class IndexController {
 		
 		return new ModelAndView("/jsp/index");
 	}
+	
+	
+	@RequestMapping("search")
+	public ModelAndView findResult(){
+		
+		
+		return new ModelAndView("jsp/find_result");
+	}
 }
