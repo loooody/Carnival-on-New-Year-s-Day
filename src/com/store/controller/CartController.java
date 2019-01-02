@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.store.entity.Cart;
@@ -95,6 +97,25 @@ public class CartController {
 		cartService.clearCart(cart);
 		
 		return new ModelAndView("redirect:findCart");
+	}
+	
+	
+	/**
+	 * 更新购物车
+	 * @param request
+	 * @param pid	商品id
+	 * @param num	修改的数量
+	 * @return
+	 */
+	@RequestMapping(value="updateCart",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
+	@ResponseBody
+	public String updateCart(HttpServletRequest request,String pid,int num) {
+		User user = (User) request.getSession().getAttribute("loginUser");
+		Cart cart = cartService.findCartByUid(user.getUid());
+		
+		String str = cartService.updateCart(cart,pid,num);
+		
+		return str;
 	}
 	
 	

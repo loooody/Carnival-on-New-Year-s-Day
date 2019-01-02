@@ -38,6 +38,12 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	 		
-	 
+	<!-- 权限拦截器 --> 		
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/cart/**"/>
+			<bean class="com.store.interceptor.PrivilegeInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors> 
 	 		
 </beans>

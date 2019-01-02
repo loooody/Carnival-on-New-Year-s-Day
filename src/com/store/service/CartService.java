@@ -51,4 +51,13 @@ public interface CartService {
 	 */
 	void clearCart(Cart cart);
 	
+	/**
+	 * 更新购物车信息
+	 * @param cart  购物车对象
+	 * @param pid  商品编号
+	 * @param num 商品修改的数量（增加或减少用正数或负数表示）
+	 * @return 返回字符串数据，用“@”分隔，数据包含 1.购物项小计 2.购物车总金额总金额
+	 */
+	String updateCart(Cart cart,String pid,int num);
+	
 }
