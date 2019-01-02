@@ -25,7 +25,7 @@ public class UserController {
 
 	@Autowired
 	UserServiceImpl userService;
-
+	MD5Utils md5;
 	@RequestMapping("loginUI")
 	public ModelAndView loginUI() {
 		return new ModelAndView("jsp/login");
@@ -41,7 +41,9 @@ public class UserController {
 		User user = new User();
 		// System.out.println("nfjsn"+username+password);
 		user.setUsername(username);
-		user.setPassword(password);
+		//password md5加密
+		String PwdMd5=md5.md5(password);
+		user.setPassword(PwdMd5);
 
 		User user02 = null;
 		/*
@@ -70,32 +72,24 @@ public class UserController {
 	@RequestMapping("userRegister")
 	public ModelAndView register(String username, String pwd, String ConfirmPwd, String email, String name, String sex,
 			String birthday, String telephone, HttpServletRequest request) {
-
-		
-		//System.out.println(username+pwd+ConfirmPwd+email+name+sex+birthday+telephone);
-
 		Date DateBirthday = new Date();
-
 		// String 的生日类型转换为Date型
 		DateTransfrormUtils dateTranf = new DateTransfrormUtils();
 		DateBirthday = dateTranf.String2Date(birthday);
-        //密码MD5加密
-		MD5Utils md5=new MD5Utils();
-		String PwdMd5=md5.md5(pwd);
+		// 密码MD5加密
+		String PwdMd5 = md5.md5(pwd);
 		// 获得uid
-		UUIDUtils UUID = new UUIDUtils();
-		String uid = UUID.getId();
-		System.out.println(uid.length());
-		//将用户设置为激活状态
-		int state=1;
-		String code=null;
-		//创建用户
-		User user = new User(uid, username, PwdMd5, name, email, telephone,
-				DateBirthday,sex,state,code);
-		//将用户存入数据库
+		UUIDUtils UID = new UUIDUtils();
+		String uid = UID.getId();
+		// 将用户设置为激活状态
+		int state = 1;
+		String code = null;
+		// 创建用户
+		User user = new User(uid, username, PwdMd5, name, email, telephone, DateBirthday, sex, state, code);
+		// 将用户存入数据库
 		userService.userRegist(user);
 		return new ModelAndView("jsp/login");
-}
+	}
 
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpServletRequest request) {

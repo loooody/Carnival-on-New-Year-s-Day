@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 </head>
 <body>
-<script> $(document).ready(function(c) {
+	<script> $(document).ready(function(c) {
 	$('.close').on('click', function(c){
 		$('.login-form').fadeOut('slow', function(c){
 	  		$('.login-form').remove();
@@ -53,6 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="avtar">
 		<img src="img/avtar.png" />
 	</div>
+	<div  style="color:#F00">${msg}</div>
   <form action="${pageContext.request.contextPath}/user/userLogin" method="post">
     <p><input type="text" name="username" id="username" value="username" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'username';}"></p>
     <p><input type="password" name="password" id="inputPassword3" placeholder="password"></p>
