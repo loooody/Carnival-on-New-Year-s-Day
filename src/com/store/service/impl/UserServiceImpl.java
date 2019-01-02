@@ -27,11 +27,10 @@ public class UserServiceImpl implements UserService {
 			return us;
 		}
 	}
-
 	@Override
 	public void userRegist(User user) {
 		// TODO Auto-generated method stub
-
+         userDao.userRegist(user);
 	}
 
 	@Override
