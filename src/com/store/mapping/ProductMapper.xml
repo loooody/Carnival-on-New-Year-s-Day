@@ -17,5 +17,29 @@
 	<select id="findProductsByCidWithPage" resultType="Product" >
 		SELECT * FROM product WHERE cid=#{cid} limit #{begin},#{pageSize}
 	</select>
+	<select id="findAllProductsWithPage" resultType="Product" >
+		SELECT * FROM product limit #{begin},#{pageSize}
+	</select>
+	<select id="findCount" resultType="int">
+		SELECT count(*) FROM product
+	</select>
+	<insert id="saveProduct" parameterType="Product">
+		INSERT INTO product values (#{pid},#{pname},#{market_price},#{shop_price},#{pimage},#{pdate},#{is_hot},#{pdesc},#{pflag},#{cid})
+	</insert>
+	<select id="findProductsByPflagWithPage" resultType="Product" >
+		SELECT * FROM product WHERE pflag=#{pflag} limit #{begin},#{pageSize}
+	</select>
+	<select id="findTotal" resultType="java.lang.Integer" >
+		SELECT count(*) FROM product WHERE pflag=#{pflag}
+	</select>
+	<update id="saletype" keyProperty="pid">
+		UPDATE product set pflag=#{pflag} WHERE pid=#{pid}
+	</update>
+	<update id="editProduct" keyProperty="pid">
+		UPDATE product set pname=#{pname},pflag=#{pflag},market_price=#{market_price},shop_price=#{shop_price},pimage=#{pimage},cid=#{cid},pdesc=#{pdesc} WHERE pid=#{pid}
+	</update>
+	<delete id="delProduct" parameterType="String">
+		DELETE FROM product WHERE pid=#{pid}
+	</delete>
 </mapper>
 
