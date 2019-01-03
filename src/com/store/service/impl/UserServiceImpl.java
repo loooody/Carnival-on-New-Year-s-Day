@@ -61,5 +61,16 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+
+	public void updateUserPwd(String uid,String newPwd) {
+		userDao.updateUserPwd(uid, newPwd);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userDao.updateUser(user);
+	}
+	
 }
 

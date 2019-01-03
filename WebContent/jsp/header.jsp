@@ -61,7 +61,7 @@
 				</c:if>
 
 				<c:if test="${not empty loginUser}">
-					<li>欢迎&nbsp;&nbsp;${loginUser.username}</li>
+					<li>欢迎<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
 					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
@@ -103,9 +103,9 @@
 						
 						
 					</ul>
-					<form class="navbar-form navbar-right" role="search">
+					<form class="navbar-form navbar-right" role="search" action="${pageContext.request.contextPath}/search" method="get">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" name="search" placeholder="">
 						</div>
 						<button type="submit" class="btn btn-default">搜索</button>
 					</form>
@@ -117,5 +117,4 @@
 		</nav>
 	</div>
 </body>
-
 </html>

@@ -15,14 +15,14 @@
 	</head>
 
 	<body>
-		<div class="container">
+		<div>
 
-			
 			<%@ include file="/jsp/header.jsp" %>
-
+			
 			<div class="container">
 				<h1>${msg }</h1>	
 			</div>
+			
 		</div>
 
 		<%@ include file="/jsp/footer.jsp" %>		
