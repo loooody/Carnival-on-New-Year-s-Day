@@ -1,108 +1,69 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+    <%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>会员登录</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
-		<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-		<!-- 引入自定义css文件 style.css -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
-
-<style>
-  body{
-   margin-top:20px;
-   margin:0 auto;
- }
- .carousel-inner .item img{
-	 width:100%;
-	 height:300px;
- }
- .container .row div{ 
-	 /* position:relative;
-	 float:left; */
- }
- 
-font {
-    color: #666;
-    font-size: 22px;
-    font-weight: normal;
-    padding-right:17px;
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<base href="<%=basePath%>">
+<title>login</title>
+<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<link href="css/style2.css" rel='stylesheet' type='text/css'/>
+	<script type="text/javascript">
+	function checklogin(){
+	var result = document.getElementById("userID").value;
+   var password = document.getElementById("passwordID").value;
+   if(result == ""  ){
+     alert("用户名不能为空");
+     return false;
+   }
+   if(password == ""  ){
+    alert("密码不能为空");
+     return false;
+   }else{
+   return true;
+   }
 }
- </style>
+	</script>
 </head>
 <body>
-	
-	
-	<%@ include file="/jsp/header.jsp" %>
-
-	
-	
-	
-	
-<div class="container"  style="width:100%;height:460px;background:#FF2C4C url('${pageContext.request.contextPath}/img/loginbg.jpg') no-repeat;">
-<div class="row"> 
-	<div class="col-md-7">
-		<!--<img src="image/login.jpg" width="500" height="330" alt="会员登录" title="会员登录">-->
+<script> $(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+});
+</script>
+  <h1>SIGN UP</h1>
+  <div class="login-form" >
+	<div class="close"> </div>
+		<div class="head-info">
+			<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="img/avtar.png" />
 	</div>
-	
-	<div class="col-md-5">
-				<div style="width:440px;border:1px solid #E7E7E7;padding:20px 0 20px 30px;border-radius:5px;margin-top:60px;background:#fff;">
-				<font>会员登录</font>USER LOGIN
-				<div>${msg}</div>
-<form class="form-horizontal" action="${pageContext.request.contextPath}/user/userLogin" method="post">
-  
- <div class="form-group">
-    <label for="username" class="col-sm-2 control-label">用户名</label>
-    <div class="col-sm-6">
-      <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名">
-    </div>
-  </div>
-   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-    <div class="col-sm-6">
-      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
-    </div>
-  </div>
-   <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码">
-    </div>
-    <div class="col-sm-3">
-      <img src="${pageContext.request.contextPath}/img/captcha.jhtml"/>
-    </div>
+  <form action="${pageContext.request.contextPath}/user/userLogin" method="post">
+    <p><input type="text" name="username" id="username" value="username" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'username';}"></p>
+    <p><input type="password" name="password" id="inputPassword3" placeholder="password"></p>
     
-  </div>
-   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> 自动登录
-        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <label>
-          <input type="checkbox"> 记住用户名
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-    <input type="submit"  width="100" value="登录" name="submit" border="0"
-    style="background: url('${pageContext.request.contextPath}/img/login.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    height:35px;width:100px;color:white;">
-    </div>
-  </div>
-</form>
-</div>			
-	</div>
-</div>
-</div>	
-
-	
-	<%@ include file="/jsp/footer.jsp" %>
-		
-</body></html>
+    <div class="form-group">
+	  <a href="jsp/register.jsp">立即注册</a> 
+	</div>		
+    <div class="signin">
+	  <input id="login_butt" type="submit" value="Login" name="submit">
+	  
+	</div>	 
+  </form>
+</body>
+</html>

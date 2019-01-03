@@ -28,5 +28,6 @@ public class CategoryController {
 		String jsonStr = JSONArray.fromObject(list).toString();
 		//System.out.println(jsonStr);
 		return jsonStr;
+		//testmmfgdfhttps://github.com/loooody/Carnival-on-New-Year-s-Day.git
 	}
 }

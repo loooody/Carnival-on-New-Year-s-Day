@@ -44,13 +44,13 @@
             	描述：菜单栏
             -->
 	<div class="container-fluid">
-		<div class="col-md-4">
-			<img src="${pageContext.request.contextPath}/img/logo4.png" />
+		<div class="col-md-4" >
+			<img  style="height:120px;width:250px" src="${pageContext.request.contextPath}/img/logo4.png" />
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-5" style="padding-top: 20px">
 			<img src="${pageContext.request.contextPath}/img/header.png" />
 		</div>
-		<div class="col-md-3" style="padding-top: 20px">
+		<div class="col-md-3" style="padding-top: 40px">
 			<ol class="list-inline">
 
 				<c:if test="${empty loginUser}">
@@ -61,12 +61,12 @@
 				</c:if>
 
 				<c:if test="${not empty loginUser}">
-					<li>欢迎&nbsp;&nbsp;${loginUser.username}</li>
+					<li>欢迎&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
-					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
+					<li><a href="${pageContext.request.contextPath}/cart/findCart">购物车</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&currPage=1">我的订单</a></li>
+						href="${pageContext.request.contextPath}/Order/order_list?currPage=1">我的订单</a></li>
 				</c:if>
 			</ol>
 		</div>
@@ -117,5 +117,6 @@
 		</nav>
 	</div>
 </body>
+
 
 </html>
