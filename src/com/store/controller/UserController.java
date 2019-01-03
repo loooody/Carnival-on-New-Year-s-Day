@@ -101,7 +101,7 @@ public class UserController {
 	@RequestMapping("changePwd")
 	public String changePwd(String oldPwd,String newPwd,HttpServletRequest request) {
 		String passwordString = MD5.md5(oldPwd);
-		System.out.println(passwordString);
+		//System.out.println(passwordString);
 		User user = (User)request.getSession().getAttribute("loginUser");
 		String uid = user.getUid();
 		if(passwordString != user.getPassword()) {
@@ -111,6 +111,7 @@ public class UserController {
 			return "redirect:changePwdUI";
 		}
 		//System.out.println(uid);
+		newPwd = MD5.md5(newPwd);   //对密码进行hash
 		userService.updateUserPwd(uid, newPwd);
 		return "redirect:userinfo";
 	}
@@ -123,7 +124,7 @@ public class UserController {
 //		else {
 //			System.out.println(birthday);
 //		}
-		System.out.println(sex);
+		//System.out.println(sex);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(birthday);
 		System.out.println(date);
