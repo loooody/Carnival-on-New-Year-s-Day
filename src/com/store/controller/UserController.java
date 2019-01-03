@@ -30,7 +30,7 @@ public class UserController {
 	
 	UserServiceImpl userService;
 
-	MD5Utils md5;
+	MD5Utils MD5;
 	UUIDUtils UID;
 
 	@RequestMapping("loginUI")
@@ -49,7 +49,7 @@ public class UserController {
 
 		user.setUsername(username);
 		//password md5加密
-		String PwdMd5=md5.md5(password);
+		String PwdMd5=MD5.md5(password);
 		user.setPassword(PwdMd5);
 
 		User user02 = null;
@@ -86,7 +86,7 @@ public class UserController {
 		DateBirthday = dateTranf.String2Date(birthday);
 		}
 		// 密码MD5加密
-		String PwdMd5 = md5.md5(pwd);
+		String PwdMd5 = MD5.md5(pwd);
 		// 获得uid
 		String uid = UID.getId();
 		// 将用户设置为激活状态
@@ -142,10 +142,10 @@ public class UserController {
 	@RequestMapping("changePwd")
 	public String changePwd(String oldPwd,String newPwd,HttpServletRequest request) {
 		String passwordString = MD5.md5(oldPwd);
-		//System.out.println(passwordString);
+		System.out.println(passwordString);
 		User user = (User)request.getSession().getAttribute("loginUser");
 		String uid = user.getUid();
-		if(passwordString != user.getPassword()) {
+		if(!passwordString.equals(user.getPassword())) {
 			String msg = "原始密码错误！";
 			request.getSession().setAttribute("msg", msg);
 			System.out.println(request.getSession().getAttribute("msg"));

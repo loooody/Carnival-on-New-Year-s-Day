@@ -61,7 +61,7 @@
 				</c:if>
 
 				<c:if test="${not empty loginUser}">
-					<li>欢迎<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
+					<li>欢迎&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
 					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
