@@ -93,7 +93,13 @@ public class UserController {
 		request.setAttribute("msg", "注册成功,快去邮箱激活吧");
 		return new ModelAndView("jsp/login");
 	}
-
+	@RequestMapping("activate")
+	public void activate(String flag){
+		if(flag=="success"){
+			
+		}
+		
+	}
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpServletRequest request) {
 		// 清除session

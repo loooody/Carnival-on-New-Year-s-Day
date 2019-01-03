@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		 userDao.userRegist(user);
 		 String emailMsg="欢迎您注册成为我们的会员,<a href='http://localhost:8080/StoreDemo/user?method=activa&code="+user.getCode()+"'>点击链接激活</a>";
 	       try {
-			MailUtils.sendMail(user.getUsername(),user.getEmail(), emailMsg);
+			MailUtils.sendMail(user,user.getEmail(), emailMsg);
 				
 			
 		} catch (AddressException e) {

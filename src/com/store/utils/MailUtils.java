@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
+import com.store.entity.User;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 public class MailUtils {
@@ -24,7 +25,7 @@ public class MailUtils {
 	private static String content; //邮箱内容
 	private static String smtp="smtp.163.com";//发件人邮箱Smtp地址
 
-	public static void sendMail(String username,String email, String emailMsg)
+	public static void sendMail(User user,String email, String emailMsg)
 			throws AddressException, MessagingException {
 		System.out.println(email);
 
@@ -77,9 +78,9 @@ public class MailUtils {
         // 2.3 主题（标题）
         message.setSubject("邮件的标题");
         // 2.4 正文
-        String str = username+"： <br/>" +
+        String str = user.getUsername()+"： <br/>" +
                         "您好，您在本元旦狂欢注册用户，点击下面url进行激活<br/>" +
-                        "http://localhost:8080/store/<br/>" +
+                        "http://localhost:8080/store/activate?mailcode="+user.getCode()+"<br/> "+
                         "如果不能点击，请复制直接激活<br/>" +
                         "如果不是本人，请删除邮件";
         //设置编码，防止发送的内容中文乱码。
