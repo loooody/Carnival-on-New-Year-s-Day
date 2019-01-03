@@ -24,8 +24,10 @@ import com.store.utils.UUIDUtils;
 public class UserController {
 
 	@Autowired
+	
 	UserServiceImpl userService;
 	MD5Utils md5;
+	UUIDUtils UID;
 	@RequestMapping("loginUI")
 	public ModelAndView loginUI() {
 		return new ModelAndView("jsp/login");
@@ -81,11 +83,11 @@ public class UserController {
 		// 密码MD5加密
 		String PwdMd5 = md5.md5(pwd);
 		// 获得uid
-		UUIDUtils UID = new UUIDUtils();
 		String uid = UID.getId();
 		// 将用户设置为激活状态
-		int state = 1;
-		String code = null;
+		int state = 0;
+		//添加激活码
+		String code = UID.getCode();
 		// 创建用户
 		User user = new User(uid, username, PwdMd5, name, email, telephone, DateBirthday, sex, state, code);
 		// 将用户存入数据库
@@ -93,11 +95,17 @@ public class UserController {
 		request.setAttribute("msg", "注册成功,快去邮箱激活吧");
 		return new ModelAndView("jsp/login");
 	}
-	@RequestMapping("activate")
-	public void activate(String flag){
-		if(flag=="success"){
-			
+	//邮箱激活
+	@RequestMapping("activateUI")
+	public ModelAndView activate(String mailcode,HttpServletRequest request){
+		
+		System.out.println(mailcode);
+		if(mailcode.equals(null)==false){
+			userService.userActive(mailcode);			
+		}else{
+			request.setAttribute("msg", "激活失败,无激活码");
 		}
+		return new ModelAndView("jsp/activate");
 		
 	}
 	@RequestMapping("logout")

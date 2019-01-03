@@ -8,5 +8,8 @@
 	<insert id="userRegist" parameterType="User" >
 		insert into user values(#{uid},#{username},#{password},#{name},#{email},#{telephone},#{birthday},#{sex},#{state},#{code})
 	</insert>
+	<update id="userActive" parameterType="User" >
+		 update user set state=1 WHERE code=#{code}
+	</update>
 </mapper>
 

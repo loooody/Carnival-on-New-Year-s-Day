@@ -80,8 +80,8 @@ public class MailUtils {
         // 2.4 正文
         String str = user.getUsername()+"： <br/>" +
                         "您好，您在本元旦狂欢注册用户，点击下面url进行激活<br/>" +
-                        "http://localhost:8080/store/activate?mailcode="+user.getCode()+"<br/> "+
-                        "如果不能点击，请复制直接激活<br/>" +
+                        "http://localhost:8080/store/user/activateUI?mailcode="+user.getCode()+"<br/> "+
+                        "请复制直接激活<br/>" +
                         "如果不是本人，请删除邮件";
         //设置编码，防止发送的内容中文乱码。
         message.setContent(str, "text/html;charset=UTF-8");

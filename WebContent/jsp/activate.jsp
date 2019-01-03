@@ -27,38 +27,10 @@
             transform: translate(-50%, -50%);
         }
     </style>
-<script type="text/javascript">
-function activateFlag(){
-	var postData= { //传递参数到后台
-        "flag": "success"
-};
-/**重点：ajax的type,url,dataType,data属性*/
-$.ajax({
-        async : false,
-        cache : false,
-        type : 'POST',
-        url : 'user/activate',
-        dataType : "json",
-        data : postData,            
-        error : function() {
-            alert('请求失败 ');
-        },
-        success : function(data) {
-            alert(data);
-        }
-
-    });}
-
-
-</script>
-    
-    
     <script type="text/javascript">
-	var time = 8;
+	var time = 4;
 	
 	function returnUrlByTime() {
-		
- 
 		window.setTimeout('returnUrlByTime()', 1000);
  
 		time = time - 1;
@@ -69,13 +41,14 @@ $.ajax({
 </script>
 
 </head>
-<body  style=" text-align:center" onload="returnUrlByTime();activateFlag()">
+<body  style=" text-align:center" onload="returnUrlByTime();">
 <div class= "center-in-center">
 <h1>账户激活中</h1>
 <h1><b><span id="layer">7</span>秒后，转入登录界面。</b> </h1>
-<%
-		//转向语句
-		response.setHeader("Refresh", "7;URL=login.jsp");
+   
+  <%      //转向语句
+        String mailcode = request.getParameter("mailcode");
+		response.setHeader("Refresh", "3;URL=loginUI");
 	%>
 </div>
 

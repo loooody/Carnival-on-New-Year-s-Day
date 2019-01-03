@@ -7,10 +7,10 @@ public interface UserDao {
 
 	void userRegist(User user);
 //
-//	User userActive(String code);
+	void userActive(String code);
 //
-//	void updateUser(User user);
-
+	void updateUser(User user);
+    
 	User userLogin(User user);
 
 } 

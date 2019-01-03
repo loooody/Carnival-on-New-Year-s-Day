@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 		// 账号是否存在 使用ajax异步校验，
 		// 这里判断登录失败的两种情况，1-密码错误，2-未激活
 		if (us == null) {
-			throw new RuntimeException("密码错误！");
+			throw new RuntimeException("账号或密码错误！");
 		} else if (us.getState() == 0) {
 			throw new RuntimeException("用户未激活");
 		} else {
@@ -52,9 +52,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean userActive(String code) {
+	public void userActive(String code) {
+		
+		//return false;
 		// TODO Auto-generated method stub
-		return false;
+		userDao.userActive(code);
+		
+		
 	}
 	
 }
