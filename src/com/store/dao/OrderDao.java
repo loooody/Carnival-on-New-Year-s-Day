@@ -23,14 +23,13 @@ public interface OrderDao {
 	int getTotalRecords(User user);
 
 	List<Order> findMyOrdersWithPage(@Param("u")User user, @Param("b")int begin, @Param("p")int pageSize);
-//
-//	void updateOrder(Order order);
+
+	void updateOrder(Order order);
 //
 //	List<Order> findAllOrders();
 //
 //	List<Order> findAllOrdersByState(int state);
 
 	Order getOrder(String oid);
-
 
 }

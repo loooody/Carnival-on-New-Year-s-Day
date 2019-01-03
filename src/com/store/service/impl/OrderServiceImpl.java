@@ -189,5 +189,15 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 
+	/**
+	 * 更新提交后的订单详情
+	 * @param order
+	 */
+	public void updateOrder(Order order) {
+		// TODO Auto-generated method stub
+		orderDao.updateOrder(order);
+	}
+	
+
 }
 

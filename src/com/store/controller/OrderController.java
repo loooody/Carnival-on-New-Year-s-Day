@@ -73,7 +73,12 @@ public class OrderController {
 	@RequestMapping("order_list")
 	public ModelAndView findMyOrdersWithPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 获取用户信息
+		// 确认用户登录状态
 		User user = (User) request.getSession().getAttribute("loginUser");
+		if (null == user) {
+			request.setAttribute("msg", "请登录之后再下单");
+			return new ModelAndView("jsp/info.jsp");
+		}
 //		System.out.println(user.toString());
 		// 获取当前页
 		int currPage = Integer.parseInt(request.getParameter("currPage"));
@@ -101,6 +106,39 @@ public class OrderController {
 		request.setAttribute("order", order);
 		
 		return new ModelAndView("jsp/order_info");
+	}
+	
+	/**
+	 * 点击提交订单后，更新数据数据库中的订单详情
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("payOrder")
+	public ModelAndView payFor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 确认用户登录状态
+		User user = (User) request.getSession().getAttribute("loginUser");
+		if (null == user) {
+			request.setAttribute("msg", "请登录之后再下单");
+			return new ModelAndView("jsp/info.jsp");
+		}
+		String oid = request.getParameter("oid");
+		String address = request.getParameter("address");
+		String name = request.getParameter("name");
+		String telephone = request.getParameter("telephone");
+		// 更新订单上的收货人姓名，电话，地址
+		Order order = orderService.getOrderByOid(oid);
+		System.out.println(oid);
+		order.setAddress(address);
+		order.setName(name);
+		order.setOrdertime(new Date());
+		order.setState(3);
+		order.setTelephone(telephone);
+		System.out.println(order.toString());
+		orderService.updateOrder(order);
+
+		return new ModelAndView("jsp/success");
 	}
 
 }

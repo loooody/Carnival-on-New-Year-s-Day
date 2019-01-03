@@ -33,7 +33,7 @@
 
 
 		<div class="container">
-		<form id="orderForm" method="post" action="${pageContext.request.contextPath}/OrderServlet?method=payOrder">
+		<form id="orderForm" method="post" action="${pageContext.request.contextPath}/Order/payOrder">
 			<div class="row">
 
 				<div style="margin:0 auto;margin-top:10px;width:950px;">
