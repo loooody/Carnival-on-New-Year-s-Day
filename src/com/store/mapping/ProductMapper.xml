@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.dao.ProductDao">
+	<select id="findHots" resultType="Product">
+		SELECT * FROM product
+		WHERE pflag=0 AND is_hot=1 ORDER BY pdate DESC LIMIT 0,9
+	</select>
+	<select id="findNews" resultType="Product">
+		SELECT * FROM product
+		WHERE pflag=0 ORDER BY pdate DESC LIMIT 0,9
+	</select>
+	<select id="findProductByPid" resultType="Product">
+		SELECT * FROM
+		product WHERE pid=#{pid}
+	</select>
+	<select id="findTotalRecords" resultType="java.lang.Integer">
+		SELECT count(1) FROM product WHERE cid=#{cid}
+	</select>
+	<select id="findProductsByCidWithPage" resultType="Product">
+		SELECT * FROM product WHERE cid=#{cid} limit #{begin},#{pageSize}
+	</select>
+	<select id="findAllProductsWithPage" resultType="Product" >
+		SELECT * FROM product limit #{begin},#{pageSize}
+	</select>
+	<select id="findCount" resultType="int">
+		SELECT count(*) FROM product
+	</select>
+	<insert id="saveProduct" parameterType="Product">
+		INSERT INTO product values (#{pid},#{pname},#{market_price},#{shop_price},#{pimage},#{pdate},#{is_hot},#{pdesc},#{pflag},#{cid})
+	</insert>
+	<select id="findProductsByPflagWithPage" resultType="Product" >
+		SELECT * FROM product WHERE pflag=#{pflag} limit #{begin},#{pageSize}
+	</select>
+	<select id="findTotal" resultType="java.lang.Integer" >
+		SELECT count(*) FROM product WHERE pflag=#{pflag}
+	</select>
+	<update id="saletype" keyProperty="pid">
+		UPDATE product set pflag=#{pflag} WHERE pid=#{pid}
+	</update>
+	<update id="editProduct" keyProperty="pid">
+		UPDATE product set pname=#{pname},pflag=#{pflag},market_price=#{market_price},shop_price=#{shop_price},pimage=#{pimage},cid=#{cid},pdesc=#{pdesc} WHERE pid=#{pid}
+	</update>
+	<delete id="delProduct" parameterType="String">
+		DELETE FROM product WHERE pid=#{pid}
+	</delete>
+</mapper>
