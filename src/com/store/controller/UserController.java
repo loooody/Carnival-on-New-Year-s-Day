@@ -74,8 +74,10 @@ public class UserController {
 			String birthday, String telephone, HttpServletRequest request) {
 		Date DateBirthday = new Date();
 		// String 的生日类型转换为Date型
+		if(birthday.equals("")==false){
 		DateTransfrormUtils dateTranf = new DateTransfrormUtils();
 		DateBirthday = dateTranf.String2Date(birthday);
+		}
 		// 密码MD5加密
 		String PwdMd5 = md5.md5(pwd);
 		// 获得uid
@@ -88,6 +90,7 @@ public class UserController {
 		User user = new User(uid, username, PwdMd5, name, email, telephone, DateBirthday, sex, state, code);
 		// 将用户存入数据库
 		userService.userRegist(user);
+		request.setAttribute("msg", "注册成功,快去邮箱激活吧");
 		return new ModelAndView("jsp/login");
 	}
 

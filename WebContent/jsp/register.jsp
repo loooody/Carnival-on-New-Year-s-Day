@@ -38,8 +38,10 @@
 					form.elements[1].focus();
 					form.elements[2].focus();
 					return false;
+				}else if(form.elements[3].value==""){
+					alert("请输入邮箱");
+					return false;
 				}else{
-					alert("注册成功!");
 					return true;
 				}
   	  	}
@@ -62,7 +64,6 @@
 				class="lbl-3"> </label>
 		</div>
 		<div class="clear"></div>
-
 		<form action="${pageContext.request.contextPath}/user/userRegister" method="post" onsubmit="return check(this)">
 			<label class="lbl-4">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</label>
 			<input type="text" class="text"  name="username">
