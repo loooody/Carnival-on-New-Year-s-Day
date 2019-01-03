@@ -17,69 +17,99 @@ import org.springframework.web.servlet.ModelAndView;
 import com.store.entity.User;
 import com.store.service.UserService;
 import com.store.service.impl.UserServiceImpl;
+import com.store.utils.DateTransfrormUtils;
+import com.store.utils.MD5Utils;
+import com.store.utils.UUIDUtils;
 import com.store.utils.MD5Utils;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
-	
+
 	@Autowired
 	UserServiceImpl userService;
+
 	MD5Utils MD5;
-	
+  
 	@RequestMapping("loginUI")
 	public ModelAndView loginUI() {
 		return new ModelAndView("jsp/login");
 	}
-	
+
 	@RequestMapping("registUI")
 	public ModelAndView registUI() {
 		return new ModelAndView("jsp/register");
 	}
-	
+
 	@RequestMapping("userLogin")
-	public ModelAndView userLogin(String username,String password,HttpServletRequest request) {
+	public ModelAndView userLogin(String username, String password, HttpServletRequest request) {
 		User user = new User();
+
 		user.setUsername(username);
 		user.setPassword(password);
-		
+
 		User user02 = null;
 		/*
-		 * 登录有三种情况
-		 * 1-登录成功
-		 * 2-登录失败
-		 * 登录失败又分三种：1-账号不存在，2-密码错误，3-用户未激活
+		 * 登录有三种情况 1-登录成功 2-登录失败 登录失败又分三种：1-账号不存在，2-密码错误，3-用户未激活
 		 * 第一种情况可以直接使用ajax异步校验
 		 * 
-		 * 获取到登录状态可以使用数字表示状态（1,2,3分别表示成功，密码错误，未激活）
-		 * 也可以使用异常的形式进行处理。
+		 * 获取到登录状态可以使用数字表示状态（1,2,3分别表示成功，密码错误，未激活） 也可以使用异常的形式进行处理。
 		 */
 		try {
-			//select * from user where username=? and password=?
+			// select * from user where username=? and password=?
 			user02 = userService.userLogin(user);
-			//	用户登录成功，将用户信息放入session中
+			// 用户登录成功，将用户信息放入session中
 			request.getSession().setAttribute("loginUser", user02);
-			//	重定向到主页
-			return new ModelAndView("jsp/index");
+
+			return new ModelAndView("index");
 		} catch (Exception e) {
-			//	用户登录失败
+			// 用户登录失败
 			String msg = e.getMessage();
 			System.out.println(msg);
-			//	向request中放入失败的信息
+			// 向request中放入失败的信息
 			request.setAttribute("msg", msg);
 			return new ModelAndView("jsp/login");
 		}
 	}
-	
-	
-	
+
+	@RequestMapping("userRegister")
+	public ModelAndView register(String username, String pwd, String ConfirmPwd, String email, String name, String sex,
+			String birthday, String telephone, HttpServletRequest request) {
+
+		
+		//System.out.println(username+pwd+ConfirmPwd+email+name+sex+birthday+telephone);
+
+		Date DateBirthday = new Date();
+
+		// String 的生日类型转换为Date型
+		DateTransfrormUtils dateTranf = new DateTransfrormUtils();
+		DateBirthday = dateTranf.String2Date(birthday);
+        //密码MD5加密
+		MD5Utils md5=new MD5Utils();
+		String PwdMd5=md5.md5(pwd);
+		// 获得uid
+		UUIDUtils UUID = new UUIDUtils();
+		String uid = UUID.getId();
+		System.out.println(uid.length());
+		//将用户设置为激活状态
+		int state=1;
+		String code=null;
+		//创建用户
+		User user = new User(uid, username, PwdMd5, name, email, telephone,
+				DateBirthday,sex,state,code);
+		//将用户存入数据库
+		userService.userRegist(user);
+		return new ModelAndView("jsp/login");
+}
+
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpServletRequest request) {
-		//清除session
+		// 清除session
 		request.getSession().invalidate();
-		//	重定向到首页
+		// 重定向到首页
 		return new ModelAndView("index");
 	}
+
 	
 	@RequestMapping("userinfo")
 	public ModelAndView userInfo(HttpServletRequest request) {
@@ -138,5 +168,5 @@ public class UserController {
 		userService.updateUser(user);
 		return "redirect:userinfo";
 	}
-	
 }
+

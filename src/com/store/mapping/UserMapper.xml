@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.store.dao.UserDao" >
-	<select id="userLogin" parameterType="User" resultType="User" >
+<mapper namespace="com.store.dao.UserDao">
+	<select id="userLogin" parameterType="User" resultType="User">
 		select * from user where username=#{username} and password=#{password}
 	</select>
+  
+	<insert id="userRegist" parameterType="User" >
+		insert into user values(#{uid},#{username},#{password},#{name},#{email},#{telephone},#{birthday},#{sex},#{state},#{code})
+	</insert>
 	
+	<select id="findUserById" parameterType="int" resultType="User">
+		select * from grade where uid=#{id}
+	</select>
+
 	<update id="updateUserPwd">
 	  update user
 	  <set>
@@ -21,8 +29,6 @@
 	  </set>
 	  where uid=#{uid}
 	</update>
-		
-	
-	
+
 </mapper>
 

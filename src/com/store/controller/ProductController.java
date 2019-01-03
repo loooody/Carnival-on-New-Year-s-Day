@@ -28,4 +28,5 @@ public class ProductController {
 		PageBean<Product> pageBean = productService.findProductsByCidWithPage(cid, currPage, pageSize);
 		return new ModelAndView("jsp/product_list","page",pageBean);
 	}
+	
 }

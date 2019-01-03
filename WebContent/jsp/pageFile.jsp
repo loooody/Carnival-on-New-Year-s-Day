@@ -7,15 +7,15 @@
     		
     		<!-- <a href="/store_v1.0/ProductServlet?method=findProductsByCidWithPage&cid=1&currPage=1">首页</a> -->
     		
-    		<a href="${pageContext.request.contextPath}/${page.url}&currPage=1">首页</a>
-    		<a href="${pageContext.request.contextPath}/${page.url}&currPage=${page.prePageNum}">上一页</a>
+    		<a href="${pageContext.request.contextPath}/${page.url}?currPage=1">首页</a>
+    		<a href="${pageContext.request.contextPath}/${page.url}?currPage=${page.prePageNum}">上一页</a>
     		<%--显示的页码，使用forEach遍历显示的页面 --%>
     		<c:forEach begin="${page.startPage}" end="${page.endPage}" var="pagenum">
-    			<a href="${pageContext.request.contextPath}/${page.url}&currPage=${pagenum}">${pagenum}</a>
+    			<a href="${pageContext.request.contextPath}/${page.url}?currPage=${pagenum}">${pagenum}</a>
     		</c:forEach>
     		
-    		<a href="${pageContext.request.contextPath}/${page.url}&currPage=${page.nextPageNum}">下一页</a>
-    		<a href="${pageContext.request.contextPath}/${page.url}&currPage=${page.totalPage}">末页</a>
+    		<a href="${pageContext.request.contextPath}/${page.url}?currPage=${page.nextPageNum}">下一页</a>
+    		<a href="${pageContext.request.contextPath}/${page.url}?currPage=${page.totalPage}">末页</a>
     		<input type="text" id="pagenum" name="pagenum" size="1"/><input type="button" value="前往" onclick="jump()" />
     		<script type="text/javascript">
     			function jump(){
@@ -35,7 +35,7 @@
     					return;
     				}
     				//转向分页显示的Servlet
-    				window.location.href="${pageContext.request.contextPath}/${page.url}&currPage="+pagenum;
+    				window.location.href="${pageContext.request.contextPath}/${page.url}?currPage="+pagenum;
     			}
     		</script>
     	</div>
