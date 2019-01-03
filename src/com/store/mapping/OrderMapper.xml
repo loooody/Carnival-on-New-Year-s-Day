@@ -25,7 +25,7 @@
 	</insert>
 	
 	<select id="findMyOrdersWithPage" resultType="Order" >
-		select * from orders where uid=#{u.uid} limit #{b}, #{p}
+		select * from orders where uid=#{u.uid} order by ordertime desc limit #{b}, #{p}
 	</select>
 	
 	<select id="findOrderByOid" parameterType="java.lang.String" resultType="java.util.HashMap">
@@ -39,4 +39,12 @@
 	<update id="updateOrder" parameterType="Order" >
 		UPDATE orders SET state=3,address=#{address},NAME=#{name},telephone=#{telephone} WHERE oid=#{oid}
 	</update>
+	
+	<select id="findAllOrders" resultType="Order">
+		select * from orders
+	</select>
+	
+	<select id="findAllOrdersByState" resultType="Order" parameterType="java.lang.Integer">
+		select * from orders where state=#{state}
+	</select>
 </mapper>

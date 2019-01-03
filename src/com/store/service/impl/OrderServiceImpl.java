@@ -197,6 +197,17 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		orderDao.updateOrder(order);
 	}
+
+	@Override
+	public List<Order> findAllOrders() {
+		return orderDao.findAllOrders();
+	}
+
+	@Override
+	public List<Order> findAllOrdersByState(int state) {
+		return orderDao.findAllOrdersByState(state);
+	}
+
 	
 
 }

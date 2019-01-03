@@ -25,10 +25,10 @@ public interface OrderDao {
 	List<Order> findMyOrdersWithPage(@Param("u")User user, @Param("b")int begin, @Param("p")int pageSize);
 
 	void updateOrder(Order order);
-//
-//	List<Order> findAllOrders();
-//
-//	List<Order> findAllOrdersByState(int state);
+
+	List<Order> findAllOrders();
+
+	List<Order> findAllOrdersByState(@Param("state") int state);
 
 	Order getOrder(String oid);
 

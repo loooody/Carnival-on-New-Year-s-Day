@@ -22,12 +22,13 @@ public interface OrderService {
 	
 	public Order getOrderByOid(String oid) throws Exception;
 	
-//	Order findOrderByOid(String oid) throws Exception;
+//	Order findOrderByOid(String oid);
 
 	void updateOrder(Order order) throws Exception;
-//
-//	List<Order> findAllOrders() throws Exception;
-//
-//	List<Order> findAllOrdersByState(int state) throws Exception;
+
+	List<Order> findAllOrders();
+
+	List<Order> findAllOrdersByState(int state);
+	
 
 }
