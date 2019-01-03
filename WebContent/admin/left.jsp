@@ -32,7 +32,7 @@
 		//param5:提示信息
 		//param6:发生变化的frame的那么属性值
 		d.add('0102','01','分类管理','','','mainFrame');
-		d.add('010201','0102','分类管理','${pageContext.request.contextPath}/AdminCategoryServlet?method=findAllCats','提示信息','mainFrame');
+		d.add('010201','0102','分类管理','${pageContext.request.contextPath}/adminCategory/getAllCategory','提示信息','mainFrame');
 		
 		d.add('0104','01','商品管理');
 		d.add('010401','0104','商品管理','${pageContext.request.contextPath}/adminProduct/findAllOnsaleProductsWithPage?currPage=1','','mainFrame');

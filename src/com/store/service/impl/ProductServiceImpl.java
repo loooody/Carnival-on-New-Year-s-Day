@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
 		//	查询当前分类下商品总个数 select * from product
 		int totalRecords = productDao.findCount();
 		pageBean.setTotalRecords(totalRecords);//总记录数
-		int totalPage = totalRecords/pageSize==0?(totalRecords/pageSize):(totalRecords/pageSize+1);
+		int totalPage = totalRecords%pageSize==0?(totalRecords/pageSize):(totalRecords/pageSize+1);
 		pageBean.setTotalPage(totalPage);//总页数
 		//	起始索引，select * from product limit ?,?
 		int begin = (currPage-1)*pageSize;
@@ -140,7 +140,9 @@ public class ProductServiceImpl implements ProductService {
 		
 		
 		pageBean.setTotalRecords(totalRecords);//总记录数
-		int totalPage = totalRecords/pageSize==0?(totalRecords/pageSize):(totalRecords/pageSize+1);
+		
+		int totalPage = totalRecords%pageSize==0?(totalRecords/pageSize):(totalRecords/pageSize+1);
+		
 		pageBean.setTotalPage(totalPage);//总页数
 		//	起始索引，select * from product limit ?,?
 		int begin = (currPage-1)*pageSize;

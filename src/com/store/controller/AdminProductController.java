@@ -40,8 +40,6 @@ import com.store.utils.UploadUtils;
  */
 
 
-
-
 @Controller
 @RequestMapping("adminProduct")
 public class AdminProductController {

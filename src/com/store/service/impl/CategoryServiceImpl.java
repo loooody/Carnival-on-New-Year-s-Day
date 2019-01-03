@@ -19,6 +19,29 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> getAllCats() {
 		return categoryDao.getAllCats();
 	}
+
+	@Override
+	public void addCategory(Category category) {
+		categoryDao.addCategory(category);
+	}
+
+	@Override
+	public void editCategory(Category category) {
+		// TODO Auto-generated method stub
+		categoryDao.editCategory(category);
+	}
+
+	@Override
+	public Category getCategory(String cid) {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategory(cid);
+	}
+
+	@Override
+	public void delCategory(String cid) {
+		// TODO Auto-generated method stub
+		categoryDao.delCategory(cid);
+	}
 	
 }
 
