@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>XXX网络商城</title>
+<title>元旦狂欢网络商城</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	type="text/css" />
@@ -71,13 +71,6 @@
         
         	var info = result.response.docs;
         	var highlighting = result.highlighting;
-        	//alert(name);
-            //result是一个集合,所以需要先遍历
-//             for(var key in info){
-            	
-//             }
-            //alert(info[0]['product_name']);
-            var cnt = 0;
             $.each(info,function(index,obj){
             	var id = obj['id'];
             	var high = highlighting[id];
@@ -85,18 +78,24 @@
             		//alert(high['product_name']);
             		var product_name = high['product_name'][0];
             	}
+            	else{
+            		var product_name = obj['product_name'];
+            	}
             	if(high.hasOwnProperty("product_desc")){
             		//alert(high['product_name']);
             		var product_desc = high['product_desc'][0];
             	}
-            	
-        		$("#box").append("<div class='col-md-2' style='text-align:center;height:200px;padding:10px 0px;'>" + 
+            	else{
+            		var product_desc = obj['product_desc'];
+            	}            	
+        		$("#box").append("<div class='col-md-6' style='text-align:center;height:200px;padding:10px 0px;'>" + 
 												"<a href='${pageContext.request.contextPath}/product/findProductByPid?pid=" + obj['product_id'] + "'>" +
-													"<img src='${pageContext.request.contextPath}/products/1/c_0001.jpg' width='130' height='130' style='display: inline-block;' />" +
+													"<img src='${pageContext.request.contextPath}/" + obj['product_img'] + "' width='130' height='130' style='display: inline-block;' />" +
 												"</a>" + 
-												"<p><a href='${pageContext.request.contextPath}/product/findProductByPid?pid=" + obj['product_id'] + "' style='color:#666'>" + product_name + "</a></p>" + 
-												"<p><font color='#E4393C' style='font-size:16px'>&yen;" + obj['product_price'] + "</font></p>" +
-											 "</div>"); 
+												"<p><a href='${pageContext.request.contextPath}/product/findProductByPid?pid=" + obj['product_id'] + "' style='color:#666'>" + product_name + "</a><br/></p>" +
+												"<p>" + product_desc + "</p>" +
+												"<p><font color='#E4393C' style='font-size:16px'>&yen;" + obj['product_price'] + "</font><br/></p>" +
+											 "<br/></div>"); 
             });
         }
     </script>
