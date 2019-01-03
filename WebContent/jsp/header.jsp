@@ -44,8 +44,8 @@
             	描述：菜单栏
             -->
 	<div class="container-fluid">
-		<div class="col-md-4">
-			<img src="${pageContext.request.contextPath}/img/logo4.png" />
+		<div class="col-md-4" >
+			<img  style="height:120px;width:250px" src="${pageContext.request.contextPath}/img/logo4.png" />
 		</div>
 		<div class="col-md-5" style="padding-top: 20px">
 			<img src="${pageContext.request.contextPath}/img/header.png" />

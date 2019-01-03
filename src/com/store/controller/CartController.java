@@ -47,7 +47,7 @@ public class CartController {
 		
 		cartService.addCartItemToCart(user,pid,quantity);
 		
-		findCartInfo(user,model);
+		findCartInfo(user,model,request);
 		
 		return new ModelAndView("jsp/cart");
 	}
@@ -62,7 +62,7 @@ public class CartController {
 	public ModelAndView findCart(HttpServletRequest request,Model model) {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		
-		findCartInfo(user,model);
+		findCartInfo(user,model,request);
 		
 		return new ModelAndView("jsp/cart");
 	}
@@ -124,13 +124,14 @@ public class CartController {
 	 * @param user
 	 * @param model
 	 */
-	public void findCartInfo(User user,Model model) {
+	public void findCartInfo(User user,Model model,HttpServletRequest request) {
 		Cart cart = cartService.findCartByUid(user.getUid());
 		model.addAttribute("cart", cart);
 		
 		if(cart != null) {
 			List<CartItem> list = cartService.findCartItemByCartId(cart.getCartid());
 			model.addAttribute("cartItems", list);
+			request.getSession().setAttribute("cartItems", list);
 		}
 	}
 }

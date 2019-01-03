@@ -48,7 +48,7 @@ public class OrderController {
 		}
 		// 获取购物车
 		List<CartItem> list =  (List<CartItem>) request.getSession().getAttribute("cartItems");
-//		System.out.println(list.isEmpty());
+		System.out.println(list.isEmpty());
 		Order order = orderService.setValueForOrder(list, user);
 //		System.out.println(order.toString());
 		// 调用业务层功能：保存订单
