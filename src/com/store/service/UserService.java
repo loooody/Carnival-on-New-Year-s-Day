@@ -8,11 +8,12 @@ public interface UserService {
 
 	void userRegist(User user);
 
-	boolean userActive(String code);
+	void userActive(String code);
 
 	User userLogin(User user);
-	
+
 	void updateUser(User user);
 	
 	void updateUserPwd(String uid,String newPwd);
+
 }

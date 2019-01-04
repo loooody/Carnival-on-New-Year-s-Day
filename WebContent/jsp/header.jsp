@@ -46,11 +46,12 @@
 	<div class="container-fluid">
 		<div class="col-md-4" >
 			<img  style="height:120px;width:250px" src="${pageContext.request.contextPath}/img/logo5.png" />
+
 		</div>
-		<div class="col-md-5" style="padding-top: 20px">
+		<div class="col-md-5">
 			<img src="${pageContext.request.contextPath}/img/header.png" />
 		</div>
-		<div class="col-md-3" style="padding-top: 40px">
+		<div class="col-md-3" style="padding-top: 20px">
 			<ol class="list-inline">
 
 				<c:if test="${empty loginUser}">
@@ -64,9 +65,9 @@
 					<li>欢迎&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/userinfo">${loginUser.name}</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/user/logout">退出</a></li>
-					<li><a href="${pageContext.request.contextPath}/cart/findCart">购物车</a></li>
+					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/Order/order_list?currPage=1">我的订单</a></li>
+						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&currPage=1">我的订单</a></li>
 				</c:if>
 			</ol>
 		</div>
@@ -103,9 +104,9 @@
 						
 						
 					</ul>
-					<form class="navbar-form navbar-right" role="search">
+					<form class="navbar-form navbar-right" role="search" action="${pageContext.request.contextPath}/search" method="get">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" name="search" placeholder="">
 						</div>
 						<button type="submit" class="btn btn-default">搜索</button>
 					</form>
@@ -117,6 +118,4 @@
 		</nav>
 	</div>
 </body>
-
-
 </html>
