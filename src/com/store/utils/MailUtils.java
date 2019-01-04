@@ -19,8 +19,8 @@ import com.store.entity.User;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 public class MailUtils {
-	private static String emailName="mxc182714899@163.com";//发件人邮箱  
-	private static String password="78679567123m";//发件人邮箱的密码
+	private static String emailName="loooody@163.com";//发件人邮箱  
+	private static String password="loooody123";//发件人邮箱的密码
 	private static String title="用户激活";//邮箱标题
 	private static String content; //邮箱内容
 	private static String smtp="smtp.163.com";//发件人邮箱Smtp地址

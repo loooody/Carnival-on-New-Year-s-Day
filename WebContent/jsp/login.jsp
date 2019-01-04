@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <a href="jsp/register.jsp">立即注册</a> 
 	</div>		
     <div class="signin">
-	  <input id="login_butt" type="submit" value="Login" name="submit">
+	  <input id="login_butt" type="submit" value="登   录" name="submit">
 	  
 	</div>	 
   </form>

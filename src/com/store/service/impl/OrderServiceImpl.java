@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 		int totalRecords = orderDao.getTotalRecords(user);
 		
 		pageBean.setTotalRecords(totalRecords);// 总记录数
-		int totalPage = totalRecords / pageSize == 0 ? (totalRecords / pageSize) : (totalRecords / pageSize + 1);
+		int totalPage = totalRecords % pageSize == 0 ? (totalRecords / pageSize) : (totalRecords / pageSize + 1);
 		pageBean.setTotalPage(totalPage);// 总页数
 		// 起始索引，select * from orders where uid=? limit ?,?
 		int begin = (currPage - 1) * pageSize;
