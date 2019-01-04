@@ -83,7 +83,7 @@
 												width="5%">
 												<c:if test="${o.state==1}">未付款</c:if>
 												<c:if test="${o.state==2}">
-													<a href="${pageContext.request.contextPath}/AdminOrderServlet?method=updateOrderByOid&oid=${o.oid}">发货</a>
+													<a href="${pageContext.request.contextPath}/adminOrder/updateOrderByOid?oid=${o.oid}">发货</a>
 												</c:if>
 												<c:if test="${o.state==3}">已发货</c:if>
 												<c:if test="${o.state==4}">订单完成</c:if>
@@ -143,8 +143,8 @@ $(function(){
 		
 		if(txt == "订单详情"){
 			//向服务端发送Ajax请求,将当前的订单id传递到服务端
-			var url = "${pageContext.request.contextPath}/AdminOrderServlet";
-			var obj = {"method":"findOrderByOidWithAjax","id":id};
+			var url = "${pageContext.request.contextPath}/adminOrder/findOrderByOidWithAjax";
+			var obj = {"id":id};
 			$.post(url,obj,function(data){
 				//alert(data);
 				//清除内容
@@ -154,7 +154,7 @@ $(function(){
 				
 				//利用JQUERY遍历响应到客户端的数据
 				$.each(data,function(i,obj){
-					var td="<tr><td><img src='/store_v1.0/"+obj.product.pimage+"' width='50px'/></td><td>"+obj.product.pname+"</td><td>"+obj.product.shop_price+"</td><td>"+obj.quantity+"</td></tr>";
+					var td="<tr><td><img src='${pageContext.request.contextPath}/"+obj.product.pimage+"' width='50px'/></td><td>"+obj.product.pname+"</td><td>"+obj.product.shop_price+"</td><td>"+obj.quantity+"</td></tr>";
 					$tb.append(td);
 				});
 			},"json");

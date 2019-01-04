@@ -44,11 +44,11 @@
 		<c:if test="${not empty page.list}">
 		
 			<div class="row" style="width:1210px;margin:0 auto;">
-				<div class="col-md-12">
+				<!-- <div class="col-md-12">
 					<ol class="breadcrumb">
-						<li><a href="#">首页</a></li>
+						<li><a href="#">首页 -> 手机数码</a></li>
 					</ol>
-				</div>
+				</div> -->
 
 			  <c:forEach items="${page.list}" var="p">
 				<div class="col-md-2">
@@ -63,7 +63,7 @@
 			</div>
 			
 			<!-- 分页 -->
-			<%@ include file="/jsp/pageFile.jsp" %>
+			<%@ include file="/jsp/pageFile2.jsp" %>
 		</c:if>
 		
 
@@ -93,7 +93,7 @@
 		<!--
        		商品浏览记录:
         -->
-		<div style="width:1210px;margin:0 auto; padding: 0 9px;border: 1px solid #ddd;border-top: 2px solid #999;height: 246px;">
+		<%-- <div style="width:1210px;margin:0 auto; padding: 0 9px;border: 1px solid #ddd;border-top: 2px solid #999;height: 246px;">
 
 			<h4 style="width: 50%;float: left;font: 14px/30px " 微软雅黑 ";">浏览记录</h4>
 			<div style="width: 50%;float: right;text-align: right;"><a href="">more</a></div>
@@ -106,9 +106,9 @@
 				</ul>
 
 			</div>
-		</div>
+		</div> --%>
 		
-		<%@ include file="/jsp/footer.jsp" %>
+		<%-- <%@ include file="/jsp/footer.jsp" %> --%>
 
 	</body>
 
