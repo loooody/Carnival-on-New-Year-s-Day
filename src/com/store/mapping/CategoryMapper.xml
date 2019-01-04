@@ -5,4 +5,16 @@
 	<select id="getAllCats" resultType="Category" >
 		select * from category
 	</select>
+	<insert id="addCategory" parameterType="Category">
+		insert into category values (#{cid},#{cname})
+	</insert>
+	<update id="editCategory" keyProperty="cid">
+		update category set cname=#{cname} WHERE cid=#{cid}
+	</update>
+	<select id="getCategory" resultType="Category" >
+		select * from category WHERE cid=#{cid}
+	</select>
+	<delete id="delCategory" parameterType="String">
+		DELETE FROM category WHERE cid=#{cid}
+	</delete>
 </mapper>
